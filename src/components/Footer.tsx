@@ -25,15 +25,13 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-lg">A</span>
-              </div>
+              <img src="/logo.svg" alt="Autoglass-JM" className="w-10 h-10" />
               <div className="font-bold text-xl">
-                AI <span className="text-accent">Dynamics</span>
+                Autoglass<span className="text-accent">-JM</span>
               </div>
             </div>
             <p className="text-gray-400 mb-6">
-              Premium auto glass repair and replacement services across Miami and West Palm Beach. Mobile service, same-day repairs.
+              Miami&apos;s #1 mobile auto glass service. Windshield replacement &amp; repair at your location. Same-day service, insurance approved, lifetime warranty.
             </p>
             <div className="flex gap-4">
               <a
@@ -92,8 +90,8 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
-                  <a href="tel:+13055551234" className="text-white hover:text-accent transition-colors">
-                    (305) 555-1234
+                  <a href="tel:13059840456" className="text-white hover:text-accent transition-colors">
+                    (305) 984-0456
                   </a>
                   <p className="text-gray-500 text-sm">24/7 Emergency Line</p>
                 </div>
@@ -102,7 +100,7 @@ const Footer = () => {
                 <MessageCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
                 <div>
                   <a 
-                    href="https://wa.me/13055551234"
+                    href="https://wa.me/13059840456"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-white hover:text-green-400 transition-colors"
@@ -115,8 +113,8 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
-                  <a href="mailto:quotes@autoglass-jm.com" className="text-white hover:text-accent transition-colors">
-                    quotes@autoglass-jm.com
+                  <a href="mailto:Jmautoglassllc@gmail.com" className="text-white hover:text-accent transition-colors">
+                    Jmautoglassllc@gmail.com
                   </a>
                 </div>
               </li>
@@ -156,6 +154,3 @@ const Footer = () => {
 }
 
 export default Footer
-
-
-

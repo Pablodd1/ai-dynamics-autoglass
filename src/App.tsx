@@ -48,10 +48,12 @@ function App() {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               whileHover={{ scale: 1.02 }}
             >
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-lg">JM</span>
-              </div>
-              <div className={`font-bold text-xl transition-colors ${scrolled ? 'text-primary-900' : 'text-white'}`}>
+              <img 
+                src="/logo.svg" 
+                alt="Autoglass-JM" 
+                className="w-10 h-10"
+              />
+              <div className={`font-bold text-lg md:text-xl transition-colors ${scrolled ? 'text-primary-900' : 'text-white'}`}>
                 Autoglass<span className="text-accent">-JM</span>
               </div>
             </motion.div>

@@ -22,7 +22,7 @@ const Hero = () => {
           loop
           playsInline
           className="w-full h-full object-cover"
-          poster="https://images.unsplash.com/photo-1449965408869-e3a9c4e0-1e5a-4d7e-9e3a-4b0c8f0e9a6b?w=1920&q=80"
+          poster="https://images.unsplash.com/photo-1492144539905-47b81f9d6eeb?w=1920&q=80"
         >
           <source 
             src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-highway-with-cars-34141-large.mp4" 
@@ -77,14 +77,14 @@ const Hero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Badge */}
+            {/* Logo Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 mb-6"
+              className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 mb-6"
             >
-              <Star className="w-4 h-4 text-accent fill-accent" />
+              <img src="/logo.svg" alt="Autoglass-JM" className="w-8 h-8" />
               <span className="text-white/90 text-sm font-medium">#1 Rated Auto Glass in Miami</span>
             </motion.div>
 
@@ -99,17 +99,16 @@ const Hero = () => {
             </p>
 
             {/* Trust Badges */}
-            <div className="flex flex-wrap gap-4 mb-8">
+            <div className="flex flex-wrap gap-3 mb-8">
               {[
                 { icon: Clock, text: '30-Min Response' },
                 { icon: Shield, text: 'Insurance Approved' },
                 { icon: Star, text: '5-Star Rated' },
-              ].map((badge, index) => (
+              ].map((badge) => (
                 <motion.div
                   key={badge.text}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 + index * 0.1 }}
                   className="flex items-center gap-2 text-white/70 text-sm bg-white/5 backdrop-blur-sm px-3 py-1.5 rounded-full"
                 >
                   <badge.icon className="w-4 h-4 text-accent" />
@@ -118,40 +117,42 @@ const Hero = () => {
               ))}
             </div>
 
-            {/* Primary CTAs - BIG & OBVIOUS */}
+            {/* Primary CTAs */}
             <div className="flex flex-col gap-4 mb-6">
               <motion.a
-                href="https://wa.me/13055551234"
+                href="https://wa.me/13059840456"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="group relative overflow-hidden bg-green-500 hover:bg-green-400 text-white font-bold px-8 py-5 rounded-2xl text-lg shadow-2xl shadow-green-500/30 transition-all duration-300 flex items-center justify-center gap-3"
+                className="group relative overflow-hidden bg-green-500 hover:bg-green-400 text-white font-bold px-6 py-5 rounded-2xl text-lg shadow-2xl shadow-green-500/30 transition-all duration-300 flex items-center justify-center gap-3"
               >
                 <MessageCircle className="w-6 h-6" />
                 <span>Get WhatsApp Quote Now</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.a>
 
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 <motion.a
                   href="tel:13059840456"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex-1 bg-white hover:bg-gray-50 text-primary-900 font-bold px-6 py-4 rounded-2xl text-lg shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+                  className="flex-1 bg-white hover:bg-gray-50 text-primary-900 font-bold px-4 py-4 rounded-2xl text-base md:text-lg shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <Phone className="w-5 h-5" />
-                  <span>Call (305) 984-0456</span>
+                  <span className="hidden sm:inline">Call (305) 984-0456</span>
+                  <span className="sm:hidden">Call Now</span>
                 </motion.a>
 
                 <motion.a
-                  href="mailto:quotes@autoglass-jm.com"
+                  href="mailto:Jmautoglassllc@gmail.com"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex-1 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold px-6 py-4 rounded-2xl text-lg border border-white/20 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="flex-1 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold px-4 py-4 rounded-2xl text-base md:text-lg border border-white/20 transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <Mail className="w-5 h-5" />
-                  <span>Email Quote</span>
+                  <span className="hidden sm:inline">Email Quote</span>
+                  <span className="sm:hidden">Email</span>
                 </motion.a>
               </div>
             </div>
@@ -166,28 +167,6 @@ const Hero = () => {
               <MapPin className="w-4 h-4" />
               Serving Miami, Fort Lauderdale & West Palm Beach
             </motion.div>
-
-            {/* Social Proof */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-              className="mt-8 flex items-center gap-4"
-            >
-              <div className="flex -space-x-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-10 h-10 rounded-full bg-gradient-to-br from-primary-300 to-primary-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold"
-                  >
-                    {String.fromCharCode(64 + i)}
-                  </div>
-                ))}
-              </div>
-              <div className="text-white/70 text-sm">
-                <span className="text-white font-semibold">2,847+</span> happy customers this year
-              </div>
-            </motion.div>
           </motion.div>
 
           {/* Right Content - Quick Contact Card */}
@@ -197,18 +176,23 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="hidden lg:block"
           >
-            <div className="glass rounded-3xl p-8 relative border border-white/20">
+            <div className="glass rounded-3xl p-6 md:p-8 relative border border-white/20">
               <div className="absolute -top-4 -right-4 bg-accent text-white text-sm font-bold px-4 py-2 rounded-full animate-pulse">
                 ⚡ 24/7 Available
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-2">Need Help Now?</h3>
-              <p className="text-white/70 mb-6">Choose how you want to reach us</p>
+              <div className="flex items-center gap-3 mb-6">
+                <img src="/logo.svg" alt="Autoglass-JM" className="w-12 h-12" />
+                <div>
+                  <h3 className="text-2xl font-bold text-white">Need Help Now?</h3>
+                  <p className="text-white/70 text-sm">Choose how you want to reach us</p>
+                </div>
+              </div>
 
               {/* Contact Options */}
               <div className="space-y-3">
                 <a
-                  href="https://wa.me/13055551234"
+                  href="https://wa.me/13059840456"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4 bg-green-500/20 hover:bg-green-500/30 border border-green-500/30 rounded-xl transition-all group"
@@ -224,7 +208,7 @@ const Hero = () => {
                 </a>
 
                 <a
-                  href="tel:+13055551234"
+                  href="tel:13059840456"
                   className="flex items-center gap-4 p-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all group"
                 >
                   <div className="w-12 h-12 bg-primary-500 rounded-xl flex items-center justify-center">
@@ -232,13 +216,13 @@ const Hero = () => {
                   </div>
                   <div className="flex-1">
                     <div className="text-white font-semibold">Call Now</div>
-                    <div className="text-white/60 text-sm">(305) 555-1234</div>
+                    <div className="text-white/60 text-sm">(305) 984-0456</div>
                   </div>
                   <ChevronRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </a>
 
                 <a
-                  href="mailto:quotes@autoglass-jm.com"
+                  href="mailto:Jmautoglassllc@gmail.com"
                   className="flex items-center gap-4 p-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl transition-all group"
                 >
                   <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center">
@@ -270,7 +254,7 @@ const Hero = () => {
 
       {/* Bottom Wave */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-10">
-        <svg className="relative block w-full h-24" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <svg className="relative block w-full h-16 md:h-24" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="fill-gray-50"></path>
         </svg>
       </div>

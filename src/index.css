@@ -9,6 +9,14 @@
   
   body {
     @apply antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Mobile viewport fix */
+  @supports (height: 100dvh) {
+    .min-h-screen {
+      min-height: 100dvh;
+    }
   }
 }
 
@@ -22,11 +30,11 @@
   }
   
   .btn-primary {
-    @apply bg-accent hover:bg-accent-dark text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl;
+    @apply bg-accent hover:bg-accent-dark text-white font-semibold px-6 py-3 md:px-8 md:py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl active:scale-95;
   }
   
   .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-primary-900 font-semibold px-8 py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg;
+    @apply bg-white hover:bg-gray-50 text-primary-900 font-semibold px-6 py-3 md:px-8 md:py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg active:scale-95;
   }
   
   .text-gradient {
@@ -34,6 +42,47 @@
   }
   
   .section-padding {
-    @apply py-20 md:py-32 px-4 sm:px-6 lg:px-8;
+    @apply py-16 md:py-20 lg:py-32 px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Safe area for mobile bottom bar */
+  .safe-area-pb {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  
+  /* Tap highlight removal for mobile */
+  .tap-highlight-none {
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+  }
+  
+  /* Prevent text selection on buttons */
+  .no-select {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .glass {
+    @apply bg-white/15;
+  }
+  
+  /* Improve touch targets */
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

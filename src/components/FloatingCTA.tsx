@@ -7,23 +7,30 @@ const FloatingCTA = () => {
 
   return (
     <>
-      {/* Mobile Fixed Bottom Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 flex gap-3 z-50 shadow-2xl">
+      {/* Mobile Fixed Bottom Bar - Smart & Compact */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 p-3 flex gap-2 z-50 shadow-2xl safe-area-pb">
         <a
-          href="tel:+13055551234"
-          className="flex-1 bg-primary-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2"
+          href="tel:13059840456"
+          className="flex-1 bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all tap-highlight-none"
         >
           <Phone className="w-5 h-5" />
-          Call Now
+          <span className="text-sm">Call</span>
         </a>
         <a
-          href="https://wa.me/13055551234"
+          href="https://wa.me/13059840456"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 bg-green-500 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2"
+          className="flex-1 bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all tap-highlight-none"
         >
           <MessageCircle className="w-5 h-5" />
-          WhatsApp
+          <span className="text-sm">WhatsApp</span>
+        </a>
+        <a
+          href="mailto:Jmautoglassllc@gmail.com"
+          className="flex-1 bg-accent hover:bg-accent-dark active:bg-accent/80 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all tap-highlight-none"
+        >
+          <Mail className="w-5 h-5" />
+          <span className="text-sm">Email</span>
         </a>
       </div>
 
@@ -43,7 +50,7 @@ const FloatingCTA = () => {
               className="absolute bottom-full right-0 mb-4 space-y-3 min-w-[280px]"
             >
               <a
-                href="https://wa.me/13055551234"
+                href="https://wa.me/13059840456"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 bg-green-500 text-white px-6 py-4 rounded-2xl shadow-xl hover:bg-green-400 transition-all"
@@ -55,13 +62,13 @@ const FloatingCTA = () => {
                 </div>
               </a>
               <a
-                href="tel:+13055551234"
+                href="tel:13059840456"
                 className="flex items-center gap-3 bg-primary-600 text-white px-6 py-4 rounded-2xl shadow-xl hover:bg-primary-500 transition-all"
               >
                 <Phone className="w-6 h-6" />
                 <div>
                   <div className="font-bold">Call Now</div>
-                  <div className="text-sm text-white/80">(305) 555-1234</div>
+                  <div className="text-sm text-white/80">(305) 984-0456</div>
                 </div>
               </a>
               <a
@@ -95,8 +102,8 @@ const FloatingCTA = () => {
         </motion.div>
       </div>
 
-      {/* Add padding to bottom on mobile for fixed bar */}
-      <div className="md:hidden h-24" />
+      {/* Safe area padding for mobile */}
+      <div className="md:hidden h-20" />
     </>
   )
 }
