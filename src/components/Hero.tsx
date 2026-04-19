@@ -135,13 +135,13 @@ const Hero = () => {
 
               <div className="flex gap-4">
                 <motion.a
-                  href="tel:+13055551234"
+                  href="tel:13059840456"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="flex-1 bg-white hover:bg-gray-50 text-primary-900 font-bold px-6 py-4 rounded-2xl text-lg shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <Phone className="w-5 h-5" />
-                  <span>Call (305) 555-1234</span>
+                  <span>Call (305) 984-0456</span>
                 </motion.a>
 
                 <motion.a

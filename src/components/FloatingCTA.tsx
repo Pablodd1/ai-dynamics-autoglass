@@ -65,7 +65,7 @@ const FloatingCTA = () => {
                 </div>
               </a>
               <a
-                href="mailto:quotes@autoglass-jm.com"
+                href="mailto:Jmautoglassllc@gmail.com"
                 className="flex items-center gap-3 bg-accent text-white px-6 py-4 rounded-2xl shadow-xl hover:bg-accent/90 transition-all"
               >
                 <Mail className="w-6 h-6" />

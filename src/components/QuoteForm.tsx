@@ -77,7 +77,7 @@ const QuoteForm = () => {
           className="grid grid-cols-3 gap-4 mb-8"
         >
           <a
-            href="https://wa.me/13055551234"
+            href="https://wa.me/13059840456"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-green-500 hover:bg-green-400 text-white text-center py-4 rounded-xl font-semibold transition-all flex flex-col items-center gap-2"
@@ -325,3 +325,4 @@ const QuoteForm = () => {
 }
 
 export default QuoteForm
+

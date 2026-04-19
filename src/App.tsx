@@ -123,7 +123,7 @@ function App() {
                   </button>
                 ))}
                 <a 
-                  href="tel:+13055551234"
+                  href="tel:13059840456"
                   className="btn-primary flex items-center justify-center gap-2 w-full"
                 >
                   <Phone className="w-4 h-4" />

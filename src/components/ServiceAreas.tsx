@@ -130,11 +130,11 @@ const ServiceAreas = () => {
         >
           <p className="text-gray-600 mb-4">Don't see your area? We probably serve it anyway.</p>
           <a
-            href="tel:+13055551234"
+            href="tel:13059840456"
             className="inline-flex items-center gap-2 text-primary-700 font-semibold hover:text-primary-800"
           >
             <Phone className="w-5 h-5" />
-            Call to confirm (305) 555-1234
+            Call to confirm (305) 984-0456
           </a>
         </motion.div>
       </div>
