@@ -2,17 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Phone, 
-  MessageCircle, 
-  Shield, 
-  Clock, 
-  MapPin, 
-  Star, 
-  CheckCircle,
   Car,
-  Windshield,
-  Wrench,
-  ChevronRight,
-  Instagram,
   Menu,
   X
 } from 'lucide-react'

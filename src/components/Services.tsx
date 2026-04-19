@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
-import { Windshield, Wrench, Shield, Clock, Car, CheckCircle } from 'lucide-react'
+import { Wrench, Shield, Clock, Car, CheckCircle, LayoutGrid } from 'lucide-react'
 
 const services = [
   {
-    icon: Windshield,
+    icon: LayoutGrid,
     title: 'Windshield Replacement',
     description: 'Complete OEM & aftermarket windshield replacement with lifetime warranty. Same-day service available.',
     price: 'From $199',

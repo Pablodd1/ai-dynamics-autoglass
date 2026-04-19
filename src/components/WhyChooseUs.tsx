@@ -70,7 +70,7 @@ const WhyChooseUs = () => {
           viewport={{ once: true }}
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
         >
-          {stats.map((stat, index) => (
+          {stats.map((stat) => (
             <div
               key={stat.label}
               className="text-center p-6 bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl"
