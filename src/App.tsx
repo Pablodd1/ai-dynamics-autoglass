@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Phone, 
-  Menu,
-  X
-} from 'lucide-react'
+import { Phone, Menu, X } from 'lucide-react'
+import { useLanguage } from './context/LanguageContext'
+import LanguageToggle from './components/LanguageToggle'
 import Hero from './components/Hero'
 import Services from './components/Services'
 import WhyChooseUs from './components/WhyChooseUs'
@@ -17,6 +15,7 @@ import FloatingCTA from './components/FloatingCTA'
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { t } = useLanguage()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,8 +33,18 @@ function App() {
     }
   }
 
+  const navItems = [
+    { label: t('nav.services'), id: 'services' },
+    { label: t('nav.whyUs'), id: 'why-us' },
+    { label: t('nav.reviews'), id: 'reviews' },
+    { label: t('nav.areas'), id: 'areas' },
+  ]
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Language Toggle */}
+      <LanguageToggle />
+
       {/* Navigation */}
       <nav className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-6'
@@ -60,12 +69,7 @@ function App() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
-              {[
-                { label: 'Services', id: 'services' },
-                { label: 'Why Us', id: 'why-us' },
-                { label: 'Reviews', id: 'reviews' },
-                { label: 'Areas', id: 'areas' },
-              ].map((item) => (
+              {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
@@ -78,11 +82,11 @@ function App() {
               ))}
               
               <a 
-                href="tel:+13055551234"
+                href="tel:13059840456"
                 className="btn-primary flex items-center gap-2 text-sm"
               >
                 <Phone className="w-4 h-4" />
-                Call Now
+                {t('nav.callNow')}
               </a>
             </div>
 
@@ -110,12 +114,7 @@ function App() {
               className="md:hidden absolute top-full left-0 w-full bg-white shadow-xl"
             >
               <div className="px-4 py-6 space-y-4">
-                {[
-                  { label: 'Services', id: 'services' },
-                  { label: 'Why Us', id: 'why-us' },
-                  { label: 'Reviews', id: 'reviews' },
-                  { label: 'Areas', id: 'areas' },
-                ].map((item) => (
+                {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
@@ -129,7 +128,7 @@ function App() {
                   className="btn-primary flex items-center justify-center gap-2 w-full"
                 >
                   <Phone className="w-4 h-4" />
-                  Call Now
+                  {t('nav.callNow')}
                 </a>
               </div>
             </motion.div>

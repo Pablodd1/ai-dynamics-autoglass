@@ -1,50 +1,60 @@
 import { motion } from 'framer-motion'
-import { Shield, Clock, ThumbsUp, Award, Phone, Car } from 'lucide-react'
-
-const features = [
-  {
-    icon: Shield,
-    title: 'Lifetime Warranty',
-    description: 'Every installation comes with our comprehensive lifetime warranty against leaks, defects, and workmanship issues.',
-  },
-  {
-    icon: Clock,
-    title: 'Same-Day Service',
-    description: "Most repairs completed within hours. We come to your location so you don't waste time at a shop.",
-  },
-  {
-    icon: ThumbsUp,
-    title: 'Insurance Approved',
-    description: 'We work with all major insurance companies. Direct billing available - zero hassle for you.',
-  },
-  {
-    icon: Award,
-    title: 'Certified Technicians',
-    description: 'Our team is AGSC certified with 15+ years combined experience. Your car is in expert hands.',
-  },
-  {
-    icon: Phone,
-    title: '24/7 Support',
-    description: 'Emergencies do not wait for business hours. Call us anytime, day or night, for urgent repairs.',
-  },
-  {
-    icon: Car,
-    title: 'Mobile Service',
-    description: 'We bring the shop to you. Home, office, or roadside - we repair where you need us.',
-  },
-]
-
-const stats = [
-  { value: '15+', label: 'Years Experience' },
-  { value: '50K+', label: 'Windshields Fixed' },
-  { value: '4.9', label: 'Star Rating' },
-  { value: '30min', label: 'Avg Response' },
-]
+import { Car, Shield, Award, DollarSign, Settings, CheckCircle } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 const WhyChooseUs = () => {
+  const { t } = useLanguage()
+
+  const stats = [
+    { value: '15+', label: t('why.stats.years') },
+    { value: '5,000+', label: t('why.stats.customers') },
+    { value: '4.9★', label: t('why.stats.rating') },
+    { value: '5 min', label: t('why.stats.response') },
+  ]
+
+  const features = [
+    {
+      icon: Car,
+      title: t('why.feature1.title'),
+      description: t('why.feature1.desc'),
+    },
+    {
+      icon: Shield,
+      title: t('why.feature2.title'),
+      description: t('why.feature2.desc'),
+    },
+    {
+      icon: Award,
+      title: t('why.feature3.title'),
+      description: t('why.feature3.desc'),
+    },
+    {
+      icon: CheckCircle,
+      title: t('why.feature4.title'),
+      description: t('why.feature4.desc'),
+    },
+    {
+      icon: DollarSign,
+      title: t('why.feature5.title'),
+      description: t('why.feature5.desc'),
+    },
+    {
+      icon: Settings,
+      title: t('why.feature6.title'),
+      description: t('why.feature6.desc'),
+    },
+  ]
+
   return (
-    <section id="why-us" className="section-padding bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section id="why-us" className="section-padding bg-white relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }} />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,14 +62,15 @@ const WhyChooseUs = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block bg-primary-100 text-primary-700 font-semibold px-4 py-2 rounded-full mb-4">
-            Why Choose Us
+          <span className="inline-block bg-accent/10 text-accent font-semibold px-4 py-2 rounded-full mb-4">
+            {t('why.badge')}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            The <span className="text-gradient">Autoglass-JM</span> Difference
+            {t('why.title')}{' '}
+            <span className="text-gradient">{t('why.titleHighlight')}</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            We are not just another glass shop. We are your neighbors, committed to keeping Miami&apos;s drivers safe.
+            {t('why.subtitle')}
           </p>
         </motion.div>
 
@@ -92,12 +103,12 @@ const WhyChooseUs = () => {
               transition={{ delay: index * 0.1 }}
               className="flex gap-4"
             >
-              <div className="flex-shrink-0 w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center">
+              <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
                 <feature.icon className="w-6 h-6 text-accent" />
               </div>
               <div>
                 <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <p className="text-gray-600 text-sm">{feature.description}</p>
               </div>
             </motion.div>
           ))}
@@ -105,16 +116,15 @@ const WhyChooseUs = () => {
 
         {/* Trust Badge */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 p-8 bg-gradient-to-r from-primary-900 to-primary-800 rounded-2xl text-center text-white"
+          className="mt-16 text-center"
         >
-          <h3 className="text-2xl font-bold mb-4">100% Satisfaction Guarantee</h3>
-          <p className="text-white/80 max-w-2xl mx-auto">
-            Not happy with our work? We will make it right - no questions asked, no extra cost. 
-            That is the Autoglass-JM promise.
-          </p>
+          <div className="inline-flex items-center gap-3 bg-green-50 text-green-700 px-6 py-3 rounded-full">
+            <CheckCircle className="w-5 h-5" />
+            <span className="font-medium">100% {t('why.feature4.title')}</span>
+          </div>
         </motion.div>
       </div>
     </section>

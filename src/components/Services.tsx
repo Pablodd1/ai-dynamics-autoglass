@@ -1,52 +1,41 @@
 import { motion } from 'framer-motion'
-import { Wrench, Shield, Clock, Car, CheckCircle, LayoutGrid } from 'lucide-react'
-
-const services = [
-  {
-    icon: LayoutGrid,
-    title: 'Windshield Replacement',
-    description: 'Complete OEM & aftermarket windshield replacement with lifetime warranty. Same-day service available.',
-    price: 'From $199',
-    features: ['Lifetime warranty', 'OEM quality glass', 'ADAS recalibration', 'Mobile service'],
-  },
-  {
-    icon: Wrench,
-    title: 'Chip & Crack Repair',
-    description: 'Professional rock chip repair before it spreads. Save money with our quick fix solution.',
-    price: 'From $79',
-    features: ['Prevents spreading', '15-min repair', 'Insurance covers', 'Crystal clear finish'],
-  },
-  {
-    icon: Car,
-    title: 'Side Window Repair',
-    description: 'Broken side window? We replace all car door windows and quarter glass panels.',
-    price: 'From $149',
-    features: ['All makes/models', 'Same-day service', 'Tint matching', 'Mobile repair'],
-  },
-  {
-    icon: Shield,
-    title: 'Rear Glass Replacement',
-    description: 'Back windshield replacement with defroster grid restoration and proper sealing.',
-    price: 'From $249',
-    features: ['Defroster repair', 'Leak-proof seal', 'Heated glass options', 'Quick turnaround'],
-  },
-  {
-    icon: Clock,
-    title: 'Emergency Service',
-    description: '24/7 emergency glass repair when you need it most. Fast response guaranteed.',
-    price: 'Call for quote',
-    features: ['24/7 availability', '30-min response', 'Safe temporary fixes', 'Full replacement'],
-  },
-  {
-    icon: CheckCircle,
-    title: 'Fleet Services',
-    description: 'Corporate fleet maintenance programs with volume discounts and priority scheduling.',
-    price: 'Custom pricing',
-    features: ['Volume discounts', 'Priority scheduling', 'Monthly billing', 'Dedicated account'],
-  },
-]
+import { CarFront, Wrench, Car, CheckCircle } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 const Services = () => {
+  const { t } = useLanguage()
+
+  const services = [
+    {
+      icon: CarFront,
+      title: t('services.windshield.title'),
+      description: t('services.windshield.desc'),
+      price: t('services.windshield.price'),
+      features: [t('services.warranty'), t('services.oem'), t('services.mobile'), t('services.calibration')],
+    },
+    {
+      icon: Wrench,
+      title: t('services.chip.title'),
+      description: t('services.chip.desc'),
+      price: t('services.chip.price'),
+      features: [t('services.warranty'), t('services.mobile')],
+    },
+    {
+      icon: Car,
+      title: t('services.side.title'),
+      description: t('services.side.desc'),
+      price: t('services.side.price'),
+      features: [t('services.warranty'), t('services.oem')],
+    },
+    {
+      icon: CarFront,
+      title: t('services.rear.title'),
+      description: t('services.rear.desc'),
+      price: t('services.rear.price'),
+      features: [t('services.warranty'), t('services.oem'), t('services.mobile')],
+    },
+  ]
+
   return (
     <section id="services" className="section-padding bg-gray-50">
       <div className="max-w-7xl mx-auto">
@@ -57,19 +46,20 @@ const Services = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block bg-accent/10 text-accent font-semibold px-4 py-2 rounded-full mb-4">
-            Our Services
+          <span className="inline-block bg-primary-100 text-primary-700 font-semibold px-4 py-2 rounded-full mb-4">
+            {t('services.badge')}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Complete Auto Glass <span className="text-gradient">Solutions</span>
+            {t('services.title')}{' '}
+            <span className="text-gradient">{t('services.titleHighlight')}</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            From minor chips to full replacements, we handle every type of auto glass repair with precision and care.
+            {t('services.subtitle')}
           </p>
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -77,45 +67,38 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
-              className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+              className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
             >
-              <div className="p-8">
-                {/* Icon */}
-                <div className="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <service.icon className="w-7 h-7 text-white" />
-                </div>
-
-                {/* Title & Price */}
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-xl font-bold text-gray-900">{service.title}</h3>
-                  <span className="text-accent font-bold text-lg">{service.price}</span>
-                </div>
-
-                <p className="text-gray-600 mb-6">{service.description}</p>
-
-                {/* Features */}
-                <ul className="space-y-2">
-                  {service.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-sm text-gray-600">
-                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+              {/* Icon */}
+              <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-accent rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <service.icon className="w-8 h-8 text-white" />
               </div>
+
+              {/* Title & Price */}
+              <div className="flex justify-between items-start mb-4">
+                <h3 className="text-2xl font-bold text-gray-900">{service.title}</h3>
+                <span className="text-accent font-bold text-lg">{service.price}</span>
+              </div>
+
+              <p className="text-gray-600 mb-6">{service.description}</p>
+
+              {/* Features */}
+              <ul className="space-y-3 mb-8">
+                {service.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-2 text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
 
               {/* CTA */}
-              <div className="px-8 pb-8">
-                <a
-                  href="https://wa.me/13055551234"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full text-center bg-gray-100 hover:bg-primary-50 text-primary-700 font-semibold py-3 rounded-xl transition-colors"
-                >
-                  Get Quote
-                </a>
-              </div>
+              <a
+                href="#quote"
+                className="btn-primary w-full text-center block"
+              >
+                {t('services.getQuote')}
+              </a>
             </motion.div>
           ))}
         </div>

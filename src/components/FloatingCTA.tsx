@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
 import { MessageCircle, Phone, X, Mail } from 'lucide-react'
 import { useState } from 'react'
+import { useLanguage } from '../context/LanguageContext'
 
 const FloatingCTA = () => {
+  const { t } = useLanguage()
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
@@ -14,7 +16,7 @@ const FloatingCTA = () => {
           className="flex-1 bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all tap-highlight-none"
         >
           <Phone className="w-5 h-5" />
-          <span className="text-sm">Call</span>
+          <span className="text-sm">{t('floating.call')}</span>
         </a>
         <a
           href="https://wa.me/13059840456"
@@ -23,14 +25,14 @@ const FloatingCTA = () => {
           className="flex-1 bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all tap-highlight-none"
         >
           <MessageCircle className="w-5 h-5" />
-          <span className="text-sm">WhatsApp</span>
+          <span className="text-sm">{t('floating.whatsapp')}</span>
         </a>
         <a
           href="mailto:Jmautoglassllc@gmail.com"
           className="flex-1 bg-accent hover:bg-accent-dark active:bg-accent/80 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all tap-highlight-none"
         >
           <Mail className="w-5 h-5" />
-          <span className="text-sm">Email</span>
+          <span className="text-sm">{t('floating.email')}</span>
         </a>
       </div>
 
@@ -57,8 +59,7 @@ const FloatingCTA = () => {
               >
                 <MessageCircle className="w-6 h-6" />
                 <div>
-                  <div className="font-bold">WhatsApp</div>
-                  <div className="text-sm text-white/80">Fastest response</div>
+                  <div className="font-bold">{t('floating.desktopWhatsApp')}</div>
                 </div>
               </a>
               <a
@@ -67,8 +68,7 @@ const FloatingCTA = () => {
               >
                 <Phone className="w-6 h-6" />
                 <div>
-                  <div className="font-bold">Call Now</div>
-                  <div className="text-sm text-white/80">(305) 984-0456</div>
+                  <div className="font-bold">{t('floating.desktopCall')}</div>
                 </div>
               </a>
               <a
@@ -77,8 +77,7 @@ const FloatingCTA = () => {
               >
                 <Mail className="w-6 h-6" />
                 <div>
-                  <div className="font-bold">Email Quote</div>
-                  <div className="text-sm text-white/80">Send photos</div>
+                  <div className="font-bold">{t('floating.desktopEmail')}</div>
                 </div>
               </a>
             </motion.div>

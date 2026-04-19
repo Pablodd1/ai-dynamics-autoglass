@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion'
 import { MapPin, Phone } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 const miamiAreas = [
   'Miami Beach', 'Downtown Miami', 'Brickell', 'Coral Gables', 'Coconut Grove',
   'Wynwood', 'Design District', 'Little Havana', 'Allapattah', 'Liberty City',
-  'Overtown', 'Upper East Side', 'Midtown', 'Edgewater', 'Wynwood',
+  'Overtown', 'Upper East Side', 'Midtown', 'Edgewater',
 ]
 
 const browardAreas = [
@@ -18,6 +19,8 @@ const palmBeachAreas = [
 ]
 
 const ServiceAreas = () => {
+  const { t } = useLanguage()
+
   return (
     <section id="areas" className="section-padding bg-gray-50">
       <div className="max-w-7xl mx-auto">
@@ -29,13 +32,14 @@ const ServiceAreas = () => {
           className="text-center mb-16"
         >
           <span className="inline-block bg-primary-100 text-primary-700 font-semibold px-4 py-2 rounded-full mb-4">
-            Service Areas
+            {t('areas.badge')}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            We Cover <span className="text-gradient">All of South Florida</span>
+            {t('areas.title')}{' '}
+            <span className="text-gradient">{t('areas.titleHighlight')}</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Mobile auto glass service from Miami to West Palm Beach. We come to your location.
+            {t('areas.subtitle')}
           </p>
         </motion.div>
 
@@ -71,7 +75,7 @@ const ServiceAreas = () => {
                 <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center">
                   <MapPin className="w-5 h-5 text-primary-700" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900">Miami-Dade</h3>
+                <h3 className="text-lg font-bold text-gray-900">{t('areas.miami')}</h3>
               </div>
               <ul className="space-y-2 text-sm text-gray-600">
                 {miamiAreas.map((area) => (
@@ -89,7 +93,7 @@ const ServiceAreas = () => {
                 <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center">
                   <MapPin className="w-5 h-5 text-primary-700" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900">Broward</h3>
+                <h3 className="text-lg font-bold text-gray-900">{t('areas.broward')}</h3>
               </div>
               <ul className="space-y-2 text-sm text-gray-600">
                 {browardAreas.map((area) => (
@@ -107,7 +111,7 @@ const ServiceAreas = () => {
                 <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center">
                   <MapPin className="w-5 h-5 text-primary-700" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900">Palm Beach</h3>
+                <h3 className="text-lg font-bold text-gray-900">{t('areas.palmBeach')}</h3>
               </div>
               <ul className="space-y-2 text-sm text-gray-600">
                 {palmBeachAreas.map((area) => (
@@ -128,13 +132,13 @@ const ServiceAreas = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <p className="text-gray-600 mb-4">Don't see your area? We probably serve it anyway.</p>
+          <p className="text-gray-600 mb-4">{t('areas.cta')}</p>
           <a
             href="tel:13059840456"
             className="inline-flex items-center gap-2 text-primary-700 font-semibold hover:text-primary-800"
           >
             <Phone className="w-5 h-5" />
-            Call to confirm (305) 984-0456
+            {t('areas.ctaButton')}
           </a>
         </motion.div>
       </div>

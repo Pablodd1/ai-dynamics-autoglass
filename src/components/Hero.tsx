@@ -10,8 +10,17 @@ import {
   MapPin,
   ArrowRight
 } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 const Hero = () => {
+  const { t } = useLanguage()
+
+  const trustBadges = [
+    { icon: Clock, text: t('hero.badge1') },
+    { icon: Shield, text: t('hero.badge2') },
+    { icon: Star, text: t('hero.badge3') },
+  ]
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Video Background */}
@@ -85,26 +94,21 @@ const Hero = () => {
               className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 mb-6"
             >
               <img src="/logo.svg" alt="Autoglass-JM" className="w-8 h-8" />
-              <span className="text-white/90 text-sm font-medium">#1 Rated Auto Glass in Miami</span>
+              <span className="text-white/90 text-sm font-medium">{t('hero.badge')}</span>
             </motion.div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-              Cracked Windshield?{' '}
-              <span className="text-accent">We Come to You.</span>
+              {t('hero.title')}{' '}
+              <span className="text-accent">{t('hero.titleHighlight')}</span>
             </h1>
 
             <p className="text-xl text-white/80 mb-8 max-w-lg">
-              Same-day mobile auto glass replacement & repair across Miami & West Palm Beach. 
-              Free instant quote. Insurance approved. Lifetime warranty.
+              {t('hero.subtitle')}
             </p>
 
             {/* Trust Badges */}
             <div className="flex flex-wrap gap-3 mb-8">
-              {[
-                { icon: Clock, text: '30-Min Response' },
-                { icon: Shield, text: 'Insurance Approved' },
-                { icon: Star, text: '5-Star Rated' },
-              ].map((badge) => (
+              {trustBadges.map((badge) => (
                 <motion.div
                   key={badge.text}
                   initial={{ opacity: 0, y: 20 }}
@@ -128,7 +132,7 @@ const Hero = () => {
                 className="group relative overflow-hidden bg-green-500 hover:bg-green-400 text-white font-bold px-6 py-5 rounded-2xl text-lg shadow-2xl shadow-green-500/30 transition-all duration-300 flex items-center justify-center gap-3"
               >
                 <MessageCircle className="w-6 h-6" />
-                <span>Get WhatsApp Quote Now</span>
+                <span>{t('hero.ctaWhatsApp')}</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.a>
 
@@ -140,8 +144,8 @@ const Hero = () => {
                   className="flex-1 bg-white hover:bg-gray-50 text-primary-900 font-bold px-4 py-4 rounded-2xl text-base md:text-lg shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <Phone className="w-5 h-5" />
-                  <span className="hidden sm:inline">Call (305) 984-0456</span>
-                  <span className="sm:hidden">Call Now</span>
+                  <span className="hidden sm:inline">{t('hero.ctaCall')}</span>
+                  <span className="sm:hidden">{t('hero.ctaCallMobile')}</span>
                 </motion.a>
 
                 <motion.a
@@ -151,8 +155,8 @@ const Hero = () => {
                   className="flex-1 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-bold px-4 py-4 rounded-2xl text-base md:text-lg border border-white/20 transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <Mail className="w-5 h-5" />
-                  <span className="hidden sm:inline">Email Quote</span>
-                  <span className="sm:hidden">Email</span>
+                  <span className="hidden sm:inline">{t('hero.ctaEmail')}</span>
+                  <span className="sm:hidden">{t('hero.ctaEmailMobile')}</span>
                 </motion.a>
               </div>
             </div>
@@ -165,7 +169,7 @@ const Hero = () => {
               className="flex items-center gap-2 text-white/60 text-sm"
             >
               <MapPin className="w-4 h-4" />
-              Serving Miami, Fort Lauderdale & West Palm Beach
+              {t('hero.location')}
             </motion.div>
           </motion.div>
 
@@ -178,14 +182,14 @@ const Hero = () => {
           >
             <div className="glass rounded-3xl p-6 md:p-8 relative border border-white/20">
               <div className="absolute -top-4 -right-4 bg-accent text-white text-sm font-bold px-4 py-2 rounded-full animate-pulse">
-                ⚡ 24/7 Available
+                {t('hero.badgeAvailable')}
               </div>
 
               <div className="flex items-center gap-3 mb-6">
                 <img src="/logo.svg" alt="Autoglass-JM" className="w-12 h-12" />
                 <div>
-                  <h3 className="text-2xl font-bold text-white">Need Help Now?</h3>
-                  <p className="text-white/70 text-sm">Choose how you want to reach us</p>
+                  <h3 className="text-2xl font-bold text-white">{t('hero.contactCard.title')}</h3>
+                  <p className="text-white/70 text-sm">{t('hero.contactCard.subtitle')}</p>
                 </div>
               </div>
 
@@ -201,8 +205,8 @@ const Hero = () => {
                     <MessageCircle className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <div className="text-white font-semibold">WhatsApp</div>
-                    <div className="text-white/60 text-sm">Fastest response - under 2 min</div>
+                    <div className="text-white font-semibold">{t('hero.contactCard.whatsapp')}</div>
+                    <div className="text-white/60 text-sm">{t('hero.contactCard.whatsappDesc')}</div>
                   </div>
                   <ChevronRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </a>
@@ -215,7 +219,7 @@ const Hero = () => {
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <div className="text-white font-semibold">Call Now</div>
+                    <div className="text-white font-semibold">{t('hero.contactCard.call')}</div>
                     <div className="text-white/60 text-sm">(305) 984-0456</div>
                   </div>
                   <ChevronRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
@@ -229,8 +233,8 @@ const Hero = () => {
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <div className="text-white font-semibold">Email</div>
-                    <div className="text-white/60 text-sm">Send photos for quote</div>
+                    <div className="text-white font-semibold">{t('hero.contactCard.email')}</div>
+                    <div className="text-white/60 text-sm">{t('hero.contactCard.emailDesc')}</div>
                   </div>
                   <ChevronRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </a>
@@ -240,11 +244,11 @@ const Hero = () => {
               <div className="mt-6 grid grid-cols-2 gap-4">
                 <div className="p-4 bg-white/10 rounded-xl text-center">
                   <p className="text-3xl font-bold text-accent">5 min</p>
-                  <p className="text-white/60 text-sm">Avg Response</p>
+                  <p className="text-white/60 text-sm">{t('hero.stats.response')}</p>
                 </div>
                 <div className="p-4 bg-white/10 rounded-xl text-center">
                   <p className="text-3xl font-bold text-accent">24/7</p>
-                  <p className="text-white/60 text-sm">Emergency</p>
+                  <p className="text-white/60 text-sm">{t('hero.stats.emergency')}</p>
                 </div>
               </div>
             </div>

@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Send, CheckCircle, MessageCircle, Phone, Mail } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 const QuoteForm = () => {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -12,7 +14,7 @@ const QuoteForm = () => {
     carYear: '',
     serviceType: '',
     message: '',
-    contactMethod: 'whatsapp', // Default to WhatsApp
+    contactMethod: 'whatsapp',
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
 
@@ -22,7 +24,6 @@ const QuoteForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Simulate form submission
     setIsSubmitted(true)
     setTimeout(() => {
       setIsSubmitted(false)
@@ -41,15 +42,30 @@ const QuoteForm = () => {
   }
 
   const serviceOptions = [
-    'Windshield Replacement',
-    'Chip/Crack Repair',
-    'Side Window Repair',
-    'Rear Glass Replacement',
-    'Not Sure - Need Diagnosis',
+    { value: 'windshield', label: t('form.serviceWindshield') },
+    { value: 'chip', label: t('form.serviceChip') },
+    { value: 'side', label: t('form.serviceSide') },
+    { value: 'rear', label: t('form.serviceRear') },
+    { value: 'not_sure', label: t('form.serviceNotSure') },
   ]
 
+  const contactOptions = [
+    { value: 'whatsapp', label: t('form.contactWhatsApp'), icon: MessageCircle, color: 'green' },
+    { value: 'phone', label: t('form.contactPhone'), icon: Phone, color: 'primary' },
+    { value: 'email', label: t('form.contactEmail'), icon: Mail, color: 'accent' },
+  ]
+
+  const getContactMethodName = (method: string) => {
+    switch (method) {
+      case 'whatsapp': return t('form.success.whatsapp')
+      case 'phone': return t('form.success.phone')
+      case 'email': return t('form.success.email')
+      default: return method
+    }
+  }
+
   return (
-    <section className="section-padding bg-gradient-to-br from-primary-900 to-primary-800">
+    <section id="quote" className="section-padding bg-white">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div
@@ -58,271 +74,210 @@ const QuoteForm = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <span className="inline-block bg-white/10 text-accent font-semibold px-4 py-2 rounded-full mb-4">
-            Get a Quote
+          <span className="inline-block bg-accent/10 text-accent font-semibold px-4 py-2 rounded-full mb-4">
+            {t('form.badge')}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Fix Your Glass?
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            {t('form.title')}{' '}
+            <span className="text-gradient">{t('form.titleHighlight')}</span>
           </h2>
-          <p className="text-xl text-white/70">
-            Fill out the form or contact us directly. Multiple ways to reach us!
+          <p className="text-xl text-gray-600">
+            {t('form.subtitle')}
           </p>
         </motion.div>
 
-        {/* Quick Contact Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-3 gap-4 mb-8"
-        >
-          <a
-            href="https://wa.me/13059840456"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-green-500 hover:bg-green-400 text-white text-center py-4 rounded-xl font-semibold transition-all flex flex-col items-center gap-2"
+        {isSubmitted ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-green-50 border-2 border-green-200 rounded-3xl p-12 text-center"
           >
-            <MessageCircle className="w-6 h-6" />
-            <span className="text-sm">WhatsApp</span>
-          </a>
-          <a
-            href="tel:+13055551234"
-            className="bg-white hover:bg-gray-50 text-primary-900 text-center py-4 rounded-xl font-semibold transition-all flex flex-col items-center gap-2"
+            <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="w-10 h-10 text-white" />
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('form.success.title')}</h3>
+            <p className="text-gray-600 text-lg">
+              {t('form.success.message').replace('{method}', getContactMethodName(formData.contactMethod))}
+            </p>
+          </motion.div>
+        ) : (
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            onSubmit={handleSubmit}
+            className="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-gray-100"
           >
-            <Phone className="w-6 h-6" />
-            <span className="text-sm">Call</span>
-          </a>
-          <a
-            href="mailto:quotes@autoglass-jm.com"
-            className="bg-accent hover:bg-accent/90 text-white text-center py-4 rounded-xl font-semibold transition-all flex flex-col items-center gap-2"
-          >
-            <Mail className="w-6 h-6" />
-            <span className="text-sm">Email</span>
-          </a>
-        </motion.div>
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
+              {/* Name */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.name')}</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder={t('form.namePlaceholder')}
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
+                />
+              </div>
 
-        {/* Form Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-3xl shadow-2xl overflow-hidden"
-        >
-          {isSubmitted ? (
-            <div className="p-12 text-center">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
-              >
-                <CheckCircle className="w-10 h-10 text-green-600" />
-              </motion.div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Quote Request Sent!</h3>
-              <p className="text-gray-600 mb-6">
-                We will get back to you within 5 minutes via your preferred contact method.
-              </p>
-              <div className="flex justify-center gap-4">
-                <a
-                  href="https://wa.me/13055551234"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-green-600 font-semibold"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  Or WhatsApp us directly
-                </a>
+              {/* Phone */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.phone')}</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder={t('form.phonePlaceholder')}
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
+                />
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.email')}</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder={t('form.emailPlaceholder')}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
+                />
+              </div>
+
+              {/* Car Make */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.carMake')}</label>
+                <input
+                  type="text"
+                  name="carMake"
+                  value={formData.carMake}
+                  onChange={handleChange}
+                  placeholder={t('form.carMakePlaceholder')}
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
+                />
+              </div>
+
+              {/* Car Model */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.carModel')}</label>
+                <input
+                  type="text"
+                  name="carModel"
+                  value={formData.carModel}
+                  onChange={handleChange}
+                  placeholder={t('form.carModelPlaceholder')}
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
+                />
+              </div>
+
+              {/* Car Year */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.carYear')}</label>
+                <input
+                  type="number"
+                  name="carYear"
+                  value={formData.carYear}
+                  onChange={handleChange}
+                  placeholder={t('form.carYearPlaceholder')}
+                  min="1980"
+                  max="2030"
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
+                />
               </div>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="p-8 md:p-12">
-              {/* Preferred Contact Method */}
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  Preferred Contact Method *
-                </label>
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { value: 'whatsapp', label: 'WhatsApp', icon: MessageCircle },
-                    { value: 'phone', label: 'Phone Call', icon: Phone },
-                    { value: 'email', label: 'Email', icon: Mail },
-                  ].map((method) => (
-                    <label
-                      key={method.value}
-                      className={`cursor-pointer border-2 rounded-xl p-4 text-center transition-all ${
-                        formData.contactMethod === method.value
-                          ? 'border-accent bg-accent/5'
-                          : 'border-gray-200 hover:border-gray-300'
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="contactMethod"
-                        value={method.value}
-                        checked={formData.contactMethod === method.value}
-                        onChange={handleChange}
-                        className="hidden"
-                      />
-                      <method.icon className={`w-6 h-6 mx-auto mb-2 ${
-                        formData.contactMethod === method.value ? 'text-accent' : 'text-gray-400'
-                      }`} />
-                      <span className="text-sm font-medium">{method.label}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
 
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                {/* Name */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all outline-none"
-                    placeholder="John Doe"
-                  />
-                </div>
-
-                {/* Phone */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all outline-none"
-                    placeholder="(305) 555-1234"
-                  />
-                </div>
-
-                {/* Email */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email (optional)
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all outline-none"
-                    placeholder="john@example.com"
-                  />
-                </div>
-
-                {/* Service Type */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Service Needed *
-                  </label>
-                  <select
-                    name="serviceType"
-                    required
-                    value={formData.serviceType}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all outline-none"
-                  >
-                    <option value="">Select a service</option>
-                    {serviceOptions.map((option) => (
-                      <option key={option} value={option}>{option}</option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Car Make */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Car Make *
-                  </label>
-                  <input
-                    type="text"
-                    name="carMake"
-                    required
-                    value={formData.carMake}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all outline-none"
-                    placeholder="Toyota, Honda, BMW..."
-                  />
-                </div>
-
-                {/* Car Model */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Car Model *
-                  </label>
-                  <input
-                    type="text"
-                    name="carModel"
-                    required
-                    value={formData.carModel}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all outline-none"
-                    placeholder="Camry, Civic, X5..."
-                  />
-                </div>
-
-                {/* Car Year */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Car Year *
-                  </label>
-                  <input
-                    type="number"
-                    name="carYear"
-                    required
-                    min="1990"
-                    max="2026"
-                    value={formData.carYear}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all outline-none"
-                    placeholder="2020"
-                  />
-                </div>
-
-                {/* Message */}
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Additional Details
-                  </label>
-                  <textarea
-                    name="message"
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all outline-none resize-none"
-                    placeholder="Describe the damage, preferred time, or any special requirements..."
-                  />
-                </div>
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full btn-primary flex items-center justify-center gap-2 text-lg"
+            {/* Service Type */}
+            <div className="mb-6">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.serviceType')}</label>
+              <select
+                name="serviceType"
+                value={formData.serviceType}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
               >
-                <Send className="w-5 h-5" />
-                Get My Free Quote
-              </button>
+                <option value="">{t('form.serviceSelect')}</option>
+                {serviceOptions.map((option) => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </div>
 
-              <p className="text-center text-sm text-gray-500 mt-4">
-                By submitting, you agree to be contacted via {formData.contactMethod} about your quote.
-              </p>
-            </form>
-          )}
-        </motion.div>
+            {/* Contact Method */}
+            <div className="mb-6">
+              <label className="block text-sm font-semibold text-gray-700 mb-3">{t('form.contactMethod')}</label>
+              <div className="grid grid-cols-3 gap-4">
+                {contactOptions.map((option) => (
+                  <label
+                    key={option.value}
+                    className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                      formData.contactMethod === option.value
+                        ? option.color === 'green' 
+                          ? 'border-green-500 bg-green-50' 
+                          : option.color === 'primary'
+                            ? 'border-primary-500 bg-primary-50'
+                            : 'border-accent bg-accent/10'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="contactMethod"
+                      value={option.value}
+                      checked={formData.contactMethod === option.value}
+                      onChange={handleChange}
+                      className="sr-only"
+                    />
+                    <option.icon className={`w-5 h-5 ${
+                      option.color === 'green' 
+                        ? 'text-green-500' 
+                        : option.color === 'primary'
+                          ? 'text-primary-500'
+                          : 'text-accent'
+                    }`} />
+                    <span className="text-sm font-medium">{option.label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Message */}
+            <div className="mb-8">
+              <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.message')}</label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder={t('form.messagePlaceholder')}
+                rows={4}
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all resize-none"
+              />
+            </div>
+
+            {/* Submit */}
+            <motion.button
+              type="submit"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full btn-primary flex items-center justify-center gap-2"
+            >
+              <Send className="w-5 h-5" />
+              {t('form.submit')}
+            </motion.button>
+          </motion.form>
+        )}
       </div>
     </section>
   )
 }
 
 export default QuoteForm
-

@@ -1,21 +1,23 @@
 import { Phone, MessageCircle, MapPin, Clock, Instagram, Mail, ChevronRight } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 const Footer = () => {
+  const { t, language } = useLanguage()
   const currentYear = new Date().getFullYear()
 
   const quickLinks = [
-    { label: 'Services', href: '#services' },
-    { label: 'Why Choose Us', href: '#why-us' },
-    { label: 'Reviews', href: '#reviews' },
-    { label: 'Service Areas', href: '#areas' },
+    { label: t('nav.services'), href: '#services' },
+    { label: t('nav.whyUs'), href: '#why-us' },
+    { label: t('nav.reviews'), href: '#reviews' },
+    { label: t('nav.areas'), href: '#areas' },
   ]
 
   const services = [
-    'Windshield Replacement',
-    'Chip Repair',
-    'Side Window Repair',
-    'Rear Glass Replacement',
-    'Fleet Services',
+    t('services.windshield.title'),
+    t('services.chip.title'),
+    t('services.side.title'),
+    t('services.rear.title'),
+    language === 'es' ? 'Servicios de Flotas' : 'Fleet Services',
   ]
 
   return (
@@ -31,7 +33,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-gray-400 mb-6">
-              Miami&apos;s #1 mobile auto glass service. Windshield replacement &amp; repair at your location. Same-day service, insurance approved, lifetime warranty.
+              {t('footer.description')}
             </p>
             <div className="flex gap-4">
               <a
@@ -55,7 +57,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-bold text-lg mb-6">Quick Links</h3>
+            <h3 className="font-bold text-lg mb-6">{t('footer.quickLinks')}</h3>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
@@ -73,7 +75,7 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="font-bold text-lg mb-6">Services</h3>
+            <h3 className="font-bold text-lg mb-6">{t('footer.services')}</h3>
             <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service} className="text-gray-400">
@@ -85,7 +87,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-bold text-lg mb-6">Contact Us</h3>
+            <h3 className="font-bold text-lg mb-6">{t('footer.contact')}</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
@@ -93,7 +95,7 @@ const Footer = () => {
                   <a href="tel:13059840456" className="text-white hover:text-accent transition-colors">
                     (305) 984-0456
                   </a>
-                  <p className="text-gray-500 text-sm">24/7 Emergency Line</p>
+                  <p className="text-gray-500 text-sm">{t('footer.emergency')}</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
@@ -107,7 +109,7 @@ const Footer = () => {
                   >
                     WhatsApp
                   </a>
-                  <p className="text-gray-500 text-sm">Fastest Response</p>
+                  <p className="text-gray-500 text-sm">{t('footer.fastest')}</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
@@ -116,21 +118,22 @@ const Footer = () => {
                   <a href="mailto:Jmautoglassllc@gmail.com" className="text-white hover:text-accent transition-colors">
                     Jmautoglassllc@gmail.com
                   </a>
+                  <p className="text-gray-500 text-sm">{t('footer.sendPhotos')}</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-white">Mobile Service</p>
+                  <p className="text-white">{t('footer.mobile')}</p>
                   <p className="text-gray-500 text-sm">Miami - West Palm Beach</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-white">Mon - Sat: 7AM - 8PM</p>
-                  <p className="text-white">Sunday: 9AM - 5PM</p>
-                  <p className="text-gray-500 text-sm">24/7 Emergency Available</p>
+                  <p className="text-white">{t('footer.hours')}</p>
+                  <p className="text-white">{t('footer.hoursSun')}</p>
+                  <p className="text-gray-500 text-sm">{t('footer.emergencyAvailable')}</p>
                 </div>
               </li>
             </ul>
@@ -140,12 +143,12 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            © {currentYear} Autoglass-JM. All rights reserved.
+            {t('footer.rights').replace('{year}', currentYear.toString())}
           </p>
           <div className="flex gap-6 text-sm text-gray-500">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Insurance Info</a>
+            <a href="#" className="hover:text-white transition-colors">{t('footer.privacy')}</a>
+            <a href="#" className="hover:text-white transition-colors">{t('footer.terms')}</a>
+            <a href="#" className="hover:text-white transition-colors">{t('footer.insurance')}</a>
           </div>
         </div>
       </div>
