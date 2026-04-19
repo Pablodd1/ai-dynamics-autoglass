@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Phone, 
-  Car,
   Menu,
   X
 } from 'lucide-react'
@@ -50,10 +49,10 @@ function App() {
               whileHover={{ scale: 1.02 }}
             >
               <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent rounded-xl flex items-center justify-center">
-                <Car className="w-6 h-6 text-white" />
+                <span className="text-white font-bold text-lg">JM</span>
               </div>
               <div className={`font-bold text-xl transition-colors ${scrolled ? 'text-primary-900' : 'text-white'}`}>
-                AI <span className="text-accent">Dynamics</span>
+                Autoglass<span className="text-accent">-JM</span>
               </div>
             </motion.div>
 

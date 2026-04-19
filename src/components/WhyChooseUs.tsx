@@ -10,7 +10,7 @@ const features = [
   {
     icon: Clock,
     title: 'Same-Day Service',
-    description: 'Most repairs completed within hours. We come to your location so you don\'t waste time at a shop.',
+    description: "Most repairs completed within hours. We come to your location so you don't waste time at a shop.",
   },
   {
     icon: ThumbsUp,
@@ -25,7 +25,7 @@ const features = [
   {
     icon: Phone,
     title: '24/7 Support',
-    description: 'Emergencies don\'t wait for business hours. Call us anytime, day or night, for urgent repairs.',
+    description: 'Emergencies do not wait for business hours. Call us anytime, day or night, for urgent repairs.',
   },
   {
     icon: Car,
@@ -56,10 +56,10 @@ const WhyChooseUs = () => {
             Why Choose Us
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            The <span className="text-gradient">AI Dynamics</span> Difference
+            The <span className="text-gradient">Autoglass-JM</span> Difference
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            We\'re not just another glass shop. We\'re your neighbors, committed to keeping Miami\'s drivers safe.
+            We are not just another glass shop. We are your neighbors, committed to keeping Miami&apos;s drivers safe.
           </p>
         </motion.div>
 
@@ -112,8 +112,8 @@ const WhyChooseUs = () => {
         >
           <h3 className="text-2xl font-bold mb-4">100% Satisfaction Guarantee</h3>
           <p className="text-white/80 max-w-2xl mx-auto">
-            Not happy with our work? We\'ll make it right - no questions asked, no extra cost. 
-            That\'s the AI Dynamics promise.
+            Not happy with our work? We will make it right - no questions asked, no extra cost. 
+            That is the Autoglass-JM promise.
           </p>
         </motion.div>
       </div>

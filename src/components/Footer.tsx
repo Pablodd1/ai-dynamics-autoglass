@@ -115,8 +115,8 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
                 <div>
-                  <a href="mailto:quotes@ai-dynamics.pro" className="text-white hover:text-accent transition-colors">
-                    quotes@ai-dynamics.pro
+                  <a href="mailto:quotes@autoglass-jm.com" className="text-white hover:text-accent transition-colors">
+                    quotes@autoglass-jm.com
                   </a>
                 </div>
               </li>
@@ -142,7 +142,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            © {currentYear} AI Dynamics. All rights reserved.
+            © {currentYear} Autoglass-JM. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-gray-500">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
@@ -156,3 +156,4 @@ const Footer = () => {
 }
 
 export default Footer
+

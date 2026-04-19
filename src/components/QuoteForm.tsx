@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Send, CheckCircle, MessageCircle } from 'lucide-react'
+import { Send, CheckCircle, MessageCircle, Phone, Mail } from 'lucide-react'
 
 const QuoteForm = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +12,7 @@ const QuoteForm = () => {
     carYear: '',
     serviceType: '',
     message: '',
+    contactMethod: 'whatsapp', // Default to WhatsApp
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
 
@@ -34,6 +35,7 @@ const QuoteForm = () => {
         carYear: '',
         serviceType: '',
         message: '',
+        contactMethod: 'whatsapp',
       })
     }, 5000)
   }
@@ -63,8 +65,40 @@ const QuoteForm = () => {
             Ready to Fix Your Glass?
           </h2>
           <p className="text-xl text-white/70">
-            Fill out the form or WhatsApp us for an instant quote. Response in under 5 minutes.
+            Fill out the form or contact us directly. Multiple ways to reach us!
           </p>
+        </motion.div>
+
+        {/* Quick Contact Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-3 gap-4 mb-8"
+        >
+          <a
+            href="https://wa.me/13055551234"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-500 hover:bg-green-400 text-white text-center py-4 rounded-xl font-semibold transition-all flex flex-col items-center gap-2"
+          >
+            <MessageCircle className="w-6 h-6" />
+            <span className="text-sm">WhatsApp</span>
+          </a>
+          <a
+            href="tel:+13055551234"
+            className="bg-white hover:bg-gray-50 text-primary-900 text-center py-4 rounded-xl font-semibold transition-all flex flex-col items-center gap-2"
+          >
+            <Phone className="w-6 h-6" />
+            <span className="text-sm">Call</span>
+          </a>
+          <a
+            href="mailto:quotes@autoglass-jm.com"
+            className="bg-accent hover:bg-accent/90 text-white text-center py-4 rounded-xl font-semibold transition-all flex flex-col items-center gap-2"
+          >
+            <Mail className="w-6 h-6" />
+            <span className="text-sm">Email</span>
+          </a>
         </motion.div>
 
         {/* Form Card */}
@@ -85,20 +119,58 @@ const QuoteForm = () => {
               </motion.div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">Quote Request Sent!</h3>
               <p className="text-gray-600 mb-6">
-                We'll get back to you within 5 minutes. Check your phone for a WhatsApp message from us.
+                We will get back to you within 5 minutes via your preferred contact method.
               </p>
-              <a
-                href="https://wa.me/13055551234"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-primary-700 font-semibold"
-              >
-                <MessageCircle className="w-5 h-5" />
-                Or message us directly on WhatsApp
-              </a>
+              <div className="flex justify-center gap-4">
+                <a
+                  href="https://wa.me/13055551234"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-green-600 font-semibold"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Or WhatsApp us directly
+                </a>
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="p-8 md:p-12">
+              {/* Preferred Contact Method */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-3">
+                  Preferred Contact Method *
+                </label>
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { value: 'whatsapp', label: 'WhatsApp', icon: MessageCircle },
+                    { value: 'phone', label: 'Phone Call', icon: Phone },
+                    { value: 'email', label: 'Email', icon: Mail },
+                  ].map((method) => (
+                    <label
+                      key={method.value}
+                      className={`cursor-pointer border-2 rounded-xl p-4 text-center transition-all ${
+                        formData.contactMethod === method.value
+                          ? 'border-accent bg-accent/5'
+                          : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="contactMethod"
+                        value={method.value}
+                        checked={formData.contactMethod === method.value}
+                        onChange={handleChange}
+                        className="hidden"
+                      />
+                      <method.icon className={`w-6 h-6 mx-auto mb-2 ${
+                        formData.contactMethod === method.value ? 'text-accent' : 'text-gray-400'
+                      }`} />
+                      <span className="text-sm font-medium">{method.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 {/* Name */}
                 <div>
@@ -242,7 +314,7 @@ const QuoteForm = () => {
               </button>
 
               <p className="text-center text-sm text-gray-500 mt-4">
-                By submitting, you agree to receive SMS/WhatsApp messages about your quote.
+                By submitting, you agree to be contacted via {formData.contactMethod} about your quote.
               </p>
             </form>
           )}

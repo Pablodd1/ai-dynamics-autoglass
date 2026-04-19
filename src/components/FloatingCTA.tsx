@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { MessageCircle, Phone, X } from 'lucide-react'
+import { MessageCircle, Phone, X, Mail } from 'lucide-react'
 import { useState } from 'react'
 
 const FloatingCTA = () => {
@@ -8,10 +8,10 @@ const FloatingCTA = () => {
   return (
     <>
       {/* Mobile Fixed Bottom Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 flex gap-3 z-50">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 flex gap-3 z-50 shadow-2xl">
         <a
           href="tel:+13055551234"
-          className="flex-1 bg-primary-600 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2"
+          className="flex-1 bg-primary-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2"
         >
           <Phone className="w-5 h-5" />
           Call Now
@@ -20,14 +20,14 @@ const FloatingCTA = () => {
           href="https://wa.me/13055551234"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 bg-green-500 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2"
+          className="flex-1 bg-green-500 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2"
         >
           <MessageCircle className="w-5 h-5" />
           WhatsApp
         </a>
       </div>
 
-      {/* Desktop Floating Buttons */}
+      {/* Desktop Floating Menu */}
       <div className="hidden md:block fixed bottom-8 right-8 z-50">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -40,23 +40,39 @@ const FloatingCTA = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
-              className="absolute bottom-full right-0 mb-4 space-y-3"
+              className="absolute bottom-full right-0 mb-4 space-y-3 min-w-[280px]"
             >
-              <a
-                href="tel:+13055551234"
-                className="flex items-center gap-3 bg-primary-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-primary-700 transition-colors whitespace-nowrap"
-              >
-                <Phone className="w-5 h-5" />
-                <span className="font-semibold">(305) 555-1234</span>
-              </a>
               <a
                 href="https://wa.me/13055551234"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-green-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-600 transition-colors whitespace-nowrap"
+                className="flex items-center gap-3 bg-green-500 text-white px-6 py-4 rounded-2xl shadow-xl hover:bg-green-400 transition-all"
               >
-                <MessageCircle className="w-5 h-5" />
-                <span className="font-semibold">WhatsApp Quote</span>
+                <MessageCircle className="w-6 h-6" />
+                <div>
+                  <div className="font-bold">WhatsApp</div>
+                  <div className="text-sm text-white/80">Fastest response</div>
+                </div>
+              </a>
+              <a
+                href="tel:+13055551234"
+                className="flex items-center gap-3 bg-primary-600 text-white px-6 py-4 rounded-2xl shadow-xl hover:bg-primary-500 transition-all"
+              >
+                <Phone className="w-6 h-6" />
+                <div>
+                  <div className="font-bold">Call Now</div>
+                  <div className="text-sm text-white/80">(305) 555-1234</div>
+                </div>
+              </a>
+              <a
+                href="mailto:quotes@autoglass-jm.com"
+                className="flex items-center gap-3 bg-accent text-white px-6 py-4 rounded-2xl shadow-xl hover:bg-accent/90 transition-all"
+              >
+                <Mail className="w-6 h-6" />
+                <div>
+                  <div className="font-bold">Email Quote</div>
+                  <div className="text-sm text-white/80">Send photos</div>
+                </div>
               </a>
             </motion.div>
           )}
@@ -64,20 +80,23 @@ const FloatingCTA = () => {
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className={`w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 ${
-              isExpanded ? 'bg-gray-800 rotate-45' : 'bg-accent hover:bg-accent-dark'
+              isExpanded ? 'bg-gray-800' : 'bg-green-500 hover:bg-green-400'
             }`}
           >
             {isExpanded ? (
               <X className="w-8 h-8 text-white" />
             ) : (
-              <MessageCircle className="w-8 h-8 text-white" />
+              <div className="relative">
+                <MessageCircle className="w-8 h-8 text-white" />
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+              </div>
             )}
           </button>
         </motion.div>
       </div>
 
       {/* Add padding to bottom on mobile for fixed bar */}
-      <div className="md:hidden h-20" />
+      <div className="md:hidden h-24" />
     </>
   )
 }
