@@ -16,44 +16,44 @@ const WhyChooseUs = () => {
   const reasons = [
     {
       icon: Truck,
-      title: t('whyUs.cards.mobile.title'),
-      description: t('whyUs.cards.mobile.desc'),
+      title: t('whyUs.cards.mobile.title') as string,
+      description: t('whyUs.cards.mobile.desc') as string,
       stat: 'Free',
       statLabel: 'Mobile Service',
     },
     {
       icon: Cpu,
-      title: t('whyUs.cards.adas.title'),
-      description: t('whyUs.cards.adas.desc'),
+      title: t('whyUs.cards.adas.title') as string,
+      description: t('whyUs.cards.adas.desc') as string,
       stat: '100%',
       statLabel: 'Calibration Success',
       highlight: true,
     },
     {
       icon: Award,
-      title: t('whyUs.cards.warranty.title'),
-      description: t('whyUs.cards.warranty.desc'),
+      title: t('whyUs.cards.warranty.title') as string,
+      description: t('whyUs.cards.warranty.desc') as string,
       stat: 'Lifetime',
       statLabel: 'Warranty',
     },
     {
       icon: FileCheck,
-      title: t('whyUs.cards.insurance.title'),
-      description: t('whyUs.cards.insurance.desc'),
+      title: t('whyUs.cards.insurance.title') as string,
+      description: t('whyUs.cards.insurance.desc') as string,
       stat: '$0',
       statLabel: 'With Most Insurance',
     },
     {
       icon: Gem,
-      title: t('whyUs.cards.luxury.title'),
-      description: t('whyUs.cards.luxury.desc'),
+      title: t('whyUs.cards.luxury.title') as string,
+      description: t('whyUs.cards.luxury.desc') as string,
       stat: 'Certified',
       statLabel: 'Luxury Specialists',
     },
     {
       icon: Zap,
-      title: t('whyUs.cards.speed.title'),
-      description: t('whyUs.cards.speed.desc'),
+      title: t('whyUs.cards.speed.title') as string,
+      description: t('whyUs.cards.speed.desc') as string,
       stat: '60-90',
       statLabel: 'Minutes Average',
     },
@@ -76,13 +76,13 @@ const WhyChooseUs = () => {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-medium mb-4">
-            {t('whyUs.badge')}
+            {t('whyUs.badge') as string}
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            {t('whyUs.title')}
+            {t('whyUs.title') as string}
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            {t('whyUs.subtitle')}
+            {t('whyUs.subtitle') as string}
           </p>
         </motion.div>
 

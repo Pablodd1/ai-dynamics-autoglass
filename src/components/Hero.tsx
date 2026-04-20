@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, Clock, Shield, Star, ChevronDown, X, Menu, Quote as QuoteIcon } from 'lucide-react'
+import { Phone, Clock, Shield, Star, ChevronDown, X } from 'lucide-react'
 import { useI18n } from '../i18n/I18nContext'
 
 // Quote Modal Component
@@ -18,6 +18,7 @@ const QuoteModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
     phone: '',
     email: '',
     insurance: '',
+    location: '',
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -53,7 +54,7 @@ const QuoteModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h3 className="text-2xl font-bold text-white">{t('hero.ctaPrimary')}</h3>
+                  <h3 className="text-2xl font-bold text-white">{t('hero.ctaPrimary') as string}</h3>
                   <p className="text-slate-400 text-sm">Step {step} of 3</p>
                 </div>
                 <button onClick={onClose} className="p-2 hover:bg-white/10 rounded-full transition-colors">
@@ -279,9 +280,9 @@ const Hero = () => {
   }, [])
 
   const trustBadges = [
-    { icon: Star, label: t('trust.rating'), sublabel: t('trust.reviews') },
-    { icon: Shield, label: t('trust.warranty'), sublabel: 'On All Work' },
-    { icon: Clock, label: t('trust.mobile'), sublabel: '7 Days/Week' },
+    { icon: Star, label: t('trust.rating') as string, sublabel: t('trust.reviews') as string },
+    { icon: Shield, label: t('trust.warranty') as string, sublabel: 'On All Work' },
+    { icon: Clock, label: t('trust.mobile') as string, sublabel: '7 Days/Week' },
   ]
 
   return (
@@ -354,7 +355,7 @@ const Hero = () => {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
                 </span>
-                <span className="text-sm text-amber-400 font-medium">{t('hero.badge')}</span>
+                <span className="text-sm text-amber-400 font-medium">{t('hero.badge') as string}</span>
               </motion.div>
 
               {/* Headline */}
@@ -364,14 +365,14 @@ const Hero = () => {
                 transition={{ delay: 0.1 }}
                 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
               >
-                {t('hero.title1')}
+                {t('hero.title1') as string}
                 <br />
                 <span className="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 bg-clip-text text-transparent">
-                  {t('hero.title2')}
+                  {t('hero.title2') as string}
                 </span>
                 <br />
                 <span className="text-4xl md:text-5xl lg:text-6xl text-slate-400">
-                  {t('hero.title3')}
+                  {t('hero.title3') as string}
                 </span>
               </motion.h1>
 
@@ -382,7 +383,7 @@ const Hero = () => {
                 transition={{ delay: 0.2 }}
                 className="text-lg md:text-xl text-slate-400 mb-8 max-w-xl"
               >
-                {t('hero.subtitle')}
+                {t('hero.subtitle') as string}
               </motion.p>
 
               {/* CTAs */}
@@ -396,7 +397,7 @@ const Hero = () => {
                   onClick={() => setIsQuoteOpen(true)}
                   className="group px-8 py-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold text-lg hover:from-amber-400 hover:to-amber-500 transition-all hover:scale-105 shadow-lg shadow-amber-500/25"
                 >
-                  {t('hero.ctaPrimary')}
+                  {t('hero.ctaPrimary') as string}
                   <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
                 </button>
                 <a
@@ -404,7 +405,7 @@ const Hero = () => {
                   className="group px-8 py-4 rounded-xl border-2 border-slate-600 text-white font-semibold text-lg hover:border-amber-500 hover:bg-amber-500/10 transition-all flex items-center justify-center gap-2"
                 >
                   <Phone className="w-5 h-5" />
-                  {t('hero.ctaSecondary')}
+                  {t('hero.ctaSecondary') as string}
                 </a>
               </motion.div>
 

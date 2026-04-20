@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Windshield, ShieldCheck, Microchip, Square, PanelBottom, ScanFace, ArrowRight, Check } from 'lucide-react'
+import { Car, ShieldCheck, Cpu, Square, PanelBottom, ScanFace, ArrowRight, Check } from 'lucide-react'
 import { useI18n } from '../i18n/I18nContext'
 
 const Services = () => {
@@ -7,7 +7,7 @@ const Services = () => {
 
   const services = [
     {
-      icon: Windshield,
+      icon: Car,
       title: t('services.windshield.title') as string,
       description: t('services.windshield.desc') as string,
       features: t('services.windshield.features') as string[],
@@ -22,7 +22,7 @@ const Services = () => {
       gradient: 'from-blue-500 to-cyan-600',
     },
     {
-      icon: Microchip,
+      icon: Cpu,
       title: t('services.adas.title') as string,
       description: t('services.adas.desc') as string,
       features: t('services.adas.features') as string[],

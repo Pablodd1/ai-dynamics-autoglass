@@ -20,7 +20,7 @@ const FloatingCTA = () => {
           className="flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold shadow-lg shadow-amber-500/30"
         >
           <Phone className="w-5 h-5" />
-          {t('nav.callNow')}
+          {t('nav.callNow') as string}
         </a>
       </motion.div>
 

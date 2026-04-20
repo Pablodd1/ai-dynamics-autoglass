@@ -44,13 +44,13 @@ const ServiceAreas = () => {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-medium mb-4">
-            {t('areas.badge')}
+            {t('areas.badge') as string}
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            {t('areas.title')}
+            {t('areas.title') as string}
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            {t('areas.subtitle')}
+            {t('areas.subtitle') as string}
           </p>
         </motion.div>
 
@@ -63,7 +63,7 @@ const ServiceAreas = () => {
           >
             <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
               <MapPin className="w-5 h-5 text-amber-500" />
-              {t('areas.mainCities')}
+              {t('areas.mainCities') as string}
             </h3>
             <div className="grid sm:grid-cols-2 gap-4">
               {mainAreas.map((area) => (
@@ -86,7 +86,7 @@ const ServiceAreas = () => {
           >
             <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
               <Check className="w-5 h-5 text-green-500" />
-              {t('areas.allAreas')}
+              {t('areas.allAreas') as string}
             </h3>
             <div className="flex flex-wrap gap-2">
               {otherAreas.map((area) => (
@@ -99,7 +99,7 @@ const ServiceAreas = () => {
               ))}
             </div>
             <p className="mt-6 text-sm text-slate-500">
-              {t('areas.zipcodes')}
+              {t('areas.zipcodes') as string}
             </p>
           </motion.div>
         </div>

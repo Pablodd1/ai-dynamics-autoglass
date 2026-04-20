@@ -48,7 +48,7 @@ const LanguageToggle = () => {
           >
             <div className="p-2">
               <div className="px-3 py-2 text-xs text-slate-500 uppercase tracking-wider">
-                {t('language.title')}
+                {t('language.title') as string}
               </div>
               {languages.map((lang) => (
                 <button

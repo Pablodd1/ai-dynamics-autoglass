@@ -18,7 +18,7 @@ const Footer = () => {
                 Autoglass<span className="text-amber-500">-JM</span>
               </span>
             </a>
-            <p className="text-slate-400 text-sm mb-6">{t('footer.tagline')}</p>
+            <p className="text-slate-400 text-sm mb-6">{t('footer.tagline') as string}</p>
             <div className="space-y-2">
               <a href="tel:13059840456" className="flex items-center gap-2 text-slate-300 hover:text-amber-400 transition-colors">
                 <Phone className="w-4 h-4" />
@@ -37,31 +37,31 @@ const Footer = () => {
 
           {/* Links */}
           <div>
-            <h4 className="font-semibold text-white mb-4">{t('footer.company')}</h4>
+            <h4 className="font-semibold text-white mb-4">{t('footer.company') as string}</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.about')}</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.careers')}</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.blog')}</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.about') as string}</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.careers') as string}</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.blog') as string}</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold text-white mb-4">{t('footer.services')}</h4>
+            <h4 className="font-semibold text-white mb-4">{t('footer.services') as string}</h4>
             <ul className="space-y-2">
-              <li><a href="#services" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('services.windshield.title')}</a></li>
-              <li><a href="#services" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('services.repair.title')}</a></li>
-              <li><a href="#services" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('services.adas.title')}</a></li>
-              <li><a href="#services" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('services.sideWindow.title')}</a></li>
+              <li><a href="#services" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('services.windshield.title') as string}</a></li>
+              <li><a href="#services" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('services.repair.title') as string}</a></li>
+              <li><a href="#services" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('services.adas.title') as string}</a></li>
+              <li><a href="#services" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('services.sideWindow.title') as string}</a></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold text-white mb-4">{t('footer.support')}</h4>
+            <h4 className="font-semibold text-white mb-4">{t('footer.support') as string}</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.warranty')}</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.faq')}</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.insurance')}</a></li>
-              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.track')}</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.warranty') as string}</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.faq') as string}</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.insurance') as string}</a></li>
+              <li><a href="#" className="text-slate-400 hover:text-amber-400 transition-colors text-sm">{t('footer.track') as string}</a></li>
             </ul>
           </div>
         </div>
@@ -69,7 +69,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-slate-500 text-sm">
-            © {new Date().getFullYear()} Autoglass JM. {t('footer.rights')}
+            © {new Date().getFullYear()} Autoglass JM. {t('footer.rights') as string}
           </p>
           <div className="flex gap-4">
             {[Instagram, Facebook, Twitter].map((Icon, i) => (

@@ -76,13 +76,13 @@ const Reviews = () => {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-medium mb-4">
-            {t('reviews.badge')}
+            {t('reviews.badge') as string}
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            {t('reviews.title')}
+            {t('reviews.title') as string}
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            {t('reviews.subtitle')}
+            {t('reviews.subtitle') as string}
           </p>
         </motion.div>
 

@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useCallback, type ReactNode } from
 type Language = 'en' | 'es'
 
 interface Translations {
-  [key: string]: string | Translations
+  [key: string]: string | string[] | Translations
 }
 
 const translations: Record<Language, Translations> = {
@@ -354,7 +354,7 @@ const translations: Record<Language, Translations> = {
 interface I18nContextType {
   language: Language
   setLanguage: (lang: Language) => void
-  t: (key: string) => string | Translations
+  t: (key: string) => string | string[] | Translations
 }
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined)
@@ -363,12 +363,12 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>('en')
 
   const t = useCallback(
-    (key: string): string | Translations => {
+    (key: string): string | string[] | Translations => {
       const keys = key.split('.')
-      let value: string | Translations = translations[language]
+      let value: string | string[] | Translations = translations[language]
 
       for (const k of keys) {
-        if (typeof value === 'object' && value !== null && k in value) {
+        if (typeof value === 'object' && value !== null && !Array.isArray(value) && k in value) {
           value = value[k]
         } else {
           return key

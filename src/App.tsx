@@ -34,10 +34,10 @@ function AppContent() {
   }
 
   const navItems = [
-    { label: t('nav.services'), id: 'services' },
-    { label: t('nav.whyUs'), id: 'why-us' },
-    { label: t('nav.reviews'), id: 'reviews' },
-    { label: t('nav.areas'), id: 'areas' },
+    { label: t('nav.services') as string, id: 'services' },
+    { label: t('nav.whyUs') as string, id: 'why-us' },
+    { label: t('nav.reviews') as string, id: 'reviews' },
+    { label: t('nav.areas') as string, id: 'areas' },
   ]
 
   return (
@@ -84,7 +84,7 @@ function AppContent() {
                 className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 text-sm font-bold hover:from-amber-400 hover:to-amber-500 transition-all"
               >
                 <Phone className="w-4 h-4" />
-                {t('nav.callNow')}
+                {t('nav.callNow') as string}
               </a>
             </div>
 
@@ -126,7 +126,7 @@ function AppContent() {
                   className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold"
                 >
                   <Phone className="w-4 h-4" />
-                  {t('nav.callNow')}
+                  {t('nav.callNow') as string}
                 </a>
               </div>
             </motion.div>
