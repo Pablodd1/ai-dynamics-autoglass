@@ -17,47 +17,47 @@ const Services = () => {
   const services = [
     {
       icon: Windshield,
-      title: t('services.windshield.title'),
-      description: t('services.windshield.desc'),
-      features: t('services.windshield.features') as string[],
+      title: t('services.windshield.title') as string,
+      description: t('services.windshield.desc') as string,
+      features: (t('services.windshield.features') as string[]),
       gradient: 'from-amber-500 to-orange-600',
       popular: true,
     },
     {
       icon: ShieldCheck,
-      title: t('services.repair.title'),
-      description: t('services.repair.desc'),
-      features: t('services.repair.features') as string[],
+      title: t('services.repair.title') as string,
+      description: t('services.repair.desc') as string,
+      features: (t('services.repair.features') as string[]),
       gradient: 'from-blue-500 to-cyan-600',
     },
     {
       icon: Microchip,
-      title: t('services.adas.title'),
-      description: t('services.adas.desc'),
-      features: t('services.adas.features') as string[],
+      title: t('services.adas.title') as string,
+      description: t('services.adas.desc') as string,
+      features: (t('services.adas.features') as string[]),
       gradient: 'from-purple-500 to-pink-600',
-      badge: t('services.adas.badge'),
+      badge: t('services.adas.badge') as string,
       isNew: true,
     },
     {
       icon: Square,
-      title: t('services.sideWindow.title'),
-      description: t('services.sideWindow.desc'),
-      features: t('services.sideWindow.features') as string[],
+      title: t('services.sideWindow.title') as string,
+      description: t('services.sideWindow.desc') as string,
+      features: (t('services.sideWindow.features') as string[]),
       gradient: 'from-emerald-500 to-teal-600',
     },
     {
       icon: PanelBottom,
-      title: t('services.backGlass.title'),
-      description: t('services.backGlass.desc'),
-      features: t('services.backGlass.features') as string[],
+      title: t('services.backGlass.title') as string,
+      description: t('services.backGlass.desc') as string,
+      features: (t('services.backGlass.features') as string[]),
       gradient: 'from-rose-500 to-red-600',
     },
     {
       icon: ScanFace,
-      title: t('services.mirror.title'),
-      description: t('services.mirror.desc'),
-      features: t('services.mirror.features') as string[],
+      title: t('services.mirror.title') as string,
+      description: t('services.mirror.desc') as string,
+      features: (t('services.mirror.features') as string[]),
       gradient: 'from-indigo-500 to-violet-600',
     },
   ]
@@ -76,13 +76,13 @@ const Services = () => {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-medium mb-4">
-            {t('services.badge')}
+            {t('services.badge') as string}
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            {t('services.title')}
+            {t('services.title') as string}
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            {t('services.subtitle')}
+            {t('services.subtitle') as string}
           </p>
         </motion.div>
 
@@ -90,7 +90,7 @@ const Services = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <motion.div
-              key={service.title as string}
+              key={service.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
