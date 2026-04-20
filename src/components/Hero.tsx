@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, Clock, Shield, Star, ChevronDown, X } from 'lucide-react'
+import { Phone, Clock, Shield, Star, ChevronDown, X, Camera } from 'lucide-react'
 import { useI18n } from '../i18n/I18nContext'
+import PhotoUploadQuote from './PhotoUploadQuote'
 
 // Quote Modal Component
 const QuoteModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
@@ -271,6 +272,7 @@ const QuoteModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 const Hero = () => {
   const { t } = useI18n()
   const [isQuoteOpen, setIsQuoteOpen] = useState(false)
+  const [isPhotoQuoteOpen, setIsPhotoQuoteOpen] = useState(false)
   const [scrollY, setScrollY] = useState(0)
 
   useEffect(() => {
@@ -349,7 +351,7 @@ const Hero = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 mb-6"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-amber-500/30 mb-6"
               >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 opacity-75" />
@@ -419,7 +421,7 @@ const Hero = () => {
                 {trustBadges.map((badge) => (
                   <div
                     key={badge.label as string}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700/50"
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl glass hover:border-amber-500/30 transition-all duration-300"
                   >
                     <div className="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center">
                       <badge.icon className="w-5 h-5 text-amber-500" />
@@ -442,8 +444,8 @@ const Hero = () => {
             >
               <div className="relative">
                 {/* Main Glass Card */}
-                <div className="relative p-8 rounded-3xl bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl border border-slate-700/50 shadow-2xl">
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-amber-500/10 to-transparent" />
+                <div className="relative p-8 rounded-3xl glass-card shadow-2xl">
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-amber-500/10 to-transparent pointer-events-none" />
                   
                   <div className="relative">
                     <div className="flex items-center justify-between mb-6">
@@ -478,7 +480,19 @@ const Hero = () => {
                       </button>
                     </div>
 
-                    <div className="mt-6 pt-6 border-t border-slate-700/50">
+                    {/* Photo Upload Option */}
+                    <div className="mt-4 pt-4 border-t border-white/10">
+                      <button
+                        onClick={() => setIsPhotoQuoteOpen(true)}
+                        className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-slate-600 text-slate-300 hover:border-amber-500/50 hover:text-amber-400 transition-all"
+                      >
+                        <Camera className="w-5 h-5" />
+                        <span>Get Quote with Photo</span>
+                        <span className="text-xs bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full">New</span>
+                      </button>
+                    </div>
+
+                    <div className="mt-6 pt-6 border-t border-white/10">
                       <div className="flex items-center gap-3">
                         <div className="flex -space-x-2">
                           {[1, 2, 3, 4].map((i) => (
@@ -500,7 +514,7 @@ const Hero = () => {
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 4, repeat: Infinity }}
-                  className="absolute -top-6 -right-6 p-4 rounded-2xl bg-slate-800/90 backdrop-blur border border-slate-700 shadow-xl"
+                  className="absolute -top-6 -right-6 p-4 rounded-2xl glass shadow-xl"
                 >
                   <div className="flex items-center gap-2">
                     <Shield className="w-5 h-5 text-green-500" />
@@ -511,7 +525,7 @@ const Hero = () => {
                 <motion.div
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 5, repeat: Infinity, delay: 1 }}
-                  className="absolute -bottom-4 -left-4 p-3 rounded-xl bg-slate-800/90 backdrop-blur border border-slate-700 shadow-xl"
+                  className="absolute -bottom-4 -left-4 p-3 rounded-xl glass shadow-xl"
                 >
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-amber-500" />
@@ -544,6 +558,9 @@ const Hero = () => {
 
       {/* Quote Modal */}
       <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
+      
+      {/* Photo Upload Quote Modal */}
+      <PhotoUploadQuote isOpen={isPhotoQuoteOpen} onClose={() => setIsPhotoQuoteOpen(false)} />
     </>
   )
 }

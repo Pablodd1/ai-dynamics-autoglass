@@ -14,25 +14,201 @@
 }
 
 @layer components {
+  /* Glassmorphism Utilities */
   .glass {
-    @apply bg-slate-800/50 backdrop-blur-md border border-slate-700/50;
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
   }
   
+  .glass-dark {
+    @apply bg-slate-900/60 backdrop-blur-xl border border-slate-700/50;
+  }
+  
+  .glass-card {
+    @apply bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl border border-white/20 
+           shadow-2xl shadow-black/20;
+  }
+  
+  .glass-card-hover {
+    @apply bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl border border-white/20 
+           shadow-2xl shadow-black/20 transition-all duration-500 
+           hover:border-amber-500/30 hover:shadow-amber-500/10 hover:-translate-y-2;
+  }
+  
+  /* Bento Grid Utilities */
+  .bento-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4;
+  }
+  
+  .bento-item {
+    @apply rounded-3xl p-6 transition-all duration-500;
+  }
+  
+  .bento-item-large {
+    @apply md:col-span-2 lg:col-span-2 lg:row-span-2;
+  }
+  
+  .bento-item-wide {
+    @apply md:col-span-2;
+  }
+  
+  /* Animated Gradient Backgrounds */
+  .gradient-animated {
+    background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #0f172a);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+  }
+  
+  .gradient-mesh {
+    background: 
+      radial-gradient(at 40% 20%, rgba(251, 191, 36, 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, rgba(251, 191, 36, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+      #0f172a;
+  }
+  
+  .gradient-aurora {
+    background: linear-gradient(125deg, 
+      rgba(251, 191, 36, 0.15) 0%, 
+      rgba(59, 130, 246, 0.1) 25%, 
+      rgba(139, 92, 246, 0.1) 50%,
+      rgba(251, 191, 36, 0.1) 75%,
+      rgba(59, 130, 246, 0.15) 100%
+    );
+    background-size: 200% 200%;
+    animation: aurora-flow 20s ease infinite;
+  }
+  
+  /* Button Styles */
   .btn-primary {
-    @apply bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-900 font-bold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg shadow-amber-500/25 active:scale-95;
+    @apply bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 
+           text-slate-900 font-bold px-6 py-3 rounded-xl transition-all duration-300 
+           transform hover:scale-105 shadow-lg shadow-amber-500/25 active:scale-95;
   }
   
   .btn-secondary {
-    @apply border-2 border-slate-600 hover:border-amber-500 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95;
+    @apply border-2 border-slate-600 hover:border-amber-500 text-white font-semibold 
+           px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95;
   }
   
+  .btn-glass {
+    @apply bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 
+           text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 
+           hover:border-amber-500/50 hover:shadow-lg hover:shadow-amber-500/10;
+  }
+  
+  /* Text Utilities */
   .text-gradient {
     @apply bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 bg-clip-text text-transparent;
   }
   
+  .text-gradient-blue {
+    @apply bg-gradient-to-r from-blue-400 via-cyan-500 to-teal-400 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-purple {
+    @apply bg-gradient-to-r from-purple-400 via-pink-500 to-rose-400 bg-clip-text text-transparent;
+  }
+  
+  /* Section Utilities */
   .section-padding {
     @apply py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8;
   }
+  
+  /* Floating Animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .float-delayed {
+    animation: float 6s ease-in-out infinite 2s;
+  }
+  
+  /* Glow Effects */
+  .glow-amber {
+    box-shadow: 0 0 40px rgba(251, 191, 36, 0.3);
+  }
+  
+  .glow-blue {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+  }
+  
+  /* Shimmer Effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+}
+
+@layer utilities {
+  /* Timeline Styles */
+  .timeline-line {
+    @apply absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b 
+           from-amber-500 via-amber-500/50 to-transparent;
+  }
+  
+  .timeline-dot {
+    @apply absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-amber-500 
+           border-4 border-slate-900 transform -translate-x-1/2;
+  }
+  
+  /* Map Marker Pulse */
+  .marker-pulse {
+    @apply relative;
+  }
+  
+  .marker-pulse::before {
+    content: '';
+    @apply absolute inset-0 rounded-full bg-amber-500 animate-ping opacity-75;
+  }
+  
+  /* Card Hover Effects */
+  .card-lift {
+    @apply transition-all duration-500;
+  }
+  
+  .card-lift:hover {
+    @apply -translate-y-2 shadow-2xl;
+  }
+  
+  /* Magnetic Button Effect Container */
+  .magnetic-wrap {
+    @apply relative inline-block;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes aurora-flow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.6); }
 }
 
 /* Custom scrollbar */
@@ -63,6 +239,10 @@
 @media (max-width: 768px) {
   .glass {
     @apply bg-slate-800/70;
+  }
+  
+  .bento-grid {
+    @apply grid-cols-1 gap-3;
   }
 }
 
