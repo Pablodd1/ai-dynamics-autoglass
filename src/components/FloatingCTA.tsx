@@ -1,108 +1,65 @@
 import { motion } from 'framer-motion'
-import { MessageCircle, Phone, X, Mail } from 'lucide-react'
+import { Phone, MessageSquare, X } from 'lucide-react'
 import { useState } from 'react'
-import { useLanguage } from '../context/LanguageContext'
+import { useI18n } from '../i18n/I18nContext'
 
 const FloatingCTA = () => {
-  const { t } = useLanguage()
+  const { t } = useI18n()
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
     <>
-      {/* Mobile Fixed Bottom Bar - Smart & Compact */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 p-3 flex gap-2 z-50 shadow-2xl safe-area-pb">
+      {/* Mobile Floating Button */}
+      <motion.div
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        className="fixed bottom-6 right-6 z-40 md:hidden"
+      >
         <a
           href="tel:13059840456"
-          className="flex-1 bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all tap-highlight-none"
+          className="flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold shadow-lg shadow-amber-500/30"
         >
           <Phone className="w-5 h-5" />
-          <span className="text-sm">{t('floating.call')}</span>
+          {t('nav.callNow')}
         </a>
-        <a
-          href="https://wa.me/13059840456"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all tap-highlight-none"
-        >
-          <MessageCircle className="w-5 h-5" />
-          <span className="text-sm">{t('floating.whatsapp')}</span>
-        </a>
-        <a
-          href="mailto:Jmautoglassllc@gmail.com"
-          className="flex-1 bg-accent hover:bg-accent-dark active:bg-accent/80 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all tap-highlight-none"
-        >
-          <Mail className="w-5 h-5" />
-          <span className="text-sm">{t('floating.email')}</span>
-        </a>
-      </div>
+      </motion.div>
 
-      {/* Desktop Floating Menu */}
-      <div className="hidden md:block fixed bottom-8 right-8 z-50">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 2 }}
-          className="relative"
-        >
-          {isExpanded && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              className="absolute bottom-full right-0 mb-4 space-y-3 min-w-[280px]"
-            >
-              <a
-                href="https://wa.me/13059840456"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-green-500 text-white px-6 py-4 rounded-2xl shadow-xl hover:bg-green-400 transition-all"
-              >
-                <MessageCircle className="w-6 h-6" />
-                <div>
-                  <div className="font-bold">{t('floating.desktopWhatsApp')}</div>
-                </div>
-              </a>
-              <a
-                href="tel:13059840456"
-                className="flex items-center gap-3 bg-primary-600 text-white px-6 py-4 rounded-2xl shadow-xl hover:bg-primary-500 transition-all"
-              >
-                <Phone className="w-6 h-6" />
-                <div>
-                  <div className="font-bold">{t('floating.desktopCall')}</div>
-                </div>
-              </a>
-              <a
-                href="mailto:Jmautoglassllc@gmail.com"
-                className="flex items-center gap-3 bg-accent text-white px-6 py-4 rounded-2xl shadow-xl hover:bg-accent/90 transition-all"
-              >
-                <Mail className="w-6 h-6" />
-                <div>
-                  <div className="font-bold">{t('floating.desktopEmail')}</div>
-                </div>
-              </a>
-            </motion.div>
-          )}
-
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className={`w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 ${
-              isExpanded ? 'bg-gray-800' : 'bg-green-500 hover:bg-green-400'
-            }`}
+      {/* Desktop Floating Actions */}
+      <div className="hidden md:block fixed bottom-8 right-8 z-40">
+        {isExpanded && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="mb-4 space-y-3"
           >
-            {isExpanded ? (
-              <X className="w-8 h-8 text-white" />
-            ) : (
-              <div className="relative">
-                <MessageCircle className="w-8 h-8 text-white" />
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse" />
+            <a
+              href="tel:13059840456"
+              className="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 text-white hover:border-amber-500/50 transition-all"
+            >
+              <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
+                <Phone className="w-5 h-5 text-green-500" />
               </div>
-            )}
-          </button>
-        </motion.div>
+              <div>
+                <div className="font-semibold text-sm">Call Now</div>
+                <div className="text-xs text-slate-400">(305) 984-0456</div>
+              </div>
+            </a>
+          </motion.div>
+        )}
+        
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="w-14 h-14 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/30"
+        >
+          {isExpanded ? (
+            <X className="w-6 h-6 text-slate-900" />
+          ) : (
+            <MessageSquare className="w-6 h-6 text-slate-900" />
+          )}
+        </motion.button>
       </div>
-
-      {/* Safe area padding for mobile */}
-      <div className="md:hidden h-20" />
     </>
   )
 }

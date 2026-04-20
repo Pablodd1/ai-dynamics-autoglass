@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Phone, Menu, X } from 'lucide-react'
-import { useLanguage } from './context/LanguageContext'
+import { Phone, Menu, X, Sparkles } from 'lucide-react'
+import { I18nProvider, useI18n } from './i18n/I18nContext'
 import LanguageToggle from './components/LanguageToggle'
 import Hero from './components/Hero'
 import Services from './components/Services'
@@ -12,10 +12,10 @@ import QuoteForm from './components/QuoteForm'
 import Footer from './components/Footer'
 import FloatingCTA from './components/FloatingCTA'
 
-function App() {
+function AppContent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const { t } = useLanguage()
+  const { t } = useI18n()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,13 +41,13 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-slate-950">
       {/* Language Toggle */}
       <LanguageToggle />
 
       {/* Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-6'
+      <nav className={`fixed w-full z-40 transition-all duration-300 ${
+        scrolled ? 'bg-slate-950/95 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-6'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
@@ -57,13 +57,11 @@ function App() {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               whileHover={{ scale: 1.02 }}
             >
-              <img 
-                src="/logo.svg" 
-                alt="Autoglass-JM" 
-                className="w-10 h-10"
-              />
-              <div className={`font-bold text-lg md:text-xl transition-colors ${scrolled ? 'text-primary-900' : 'text-white'}`}>
-                Autoglass<span className="text-accent">-JM</span>
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-slate-900" />
+              </div>
+              <div className={`font-bold text-lg md:text-xl transition-colors ${scrolled ? 'text-white' : 'text-white'}`}>
+                Autoglass<span className="text-amber-500">-JM</span>
               </div>
             </motion.div>
 
@@ -73,8 +71,8 @@ function App() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`text-sm font-medium transition-colors hover:text-accent ${
-                    scrolled ? 'text-gray-700' : 'text-white/90'
+                  className={`text-sm font-medium transition-colors hover:text-amber-400 ${
+                    scrolled ? 'text-slate-300' : 'text-slate-300'
                   }`}
                 >
                   {item.label}
@@ -83,7 +81,7 @@ function App() {
               
               <a 
                 href="tel:13059840456"
-                className="btn-primary flex items-center gap-2 text-sm"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 text-sm font-bold hover:from-amber-400 hover:to-amber-500 transition-all"
               >
                 <Phone className="w-4 h-4" />
                 {t('nav.callNow')}
@@ -96,9 +94,9 @@ function App() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? (
-                <X className={`w-6 h-6 ${scrolled ? 'text-gray-900' : 'text-white'}`} />
+                <X className="w-6 h-6 text-white" />
               ) : (
-                <Menu className={`w-6 h-6 ${scrolled ? 'text-gray-900' : 'text-white'}`} />
+                <Menu className="w-6 h-6 text-white" />
               )}
             </button>
           </div>
@@ -111,21 +109,21 @@ function App() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="md:hidden absolute top-full left-0 w-full bg-white shadow-xl"
+              className="md:hidden absolute top-full left-0 w-full bg-slate-900 border-t border-slate-800"
             >
               <div className="px-4 py-6 space-y-4">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="block w-full text-left py-2 text-gray-700 font-medium"
+                    className="block w-full text-left py-2 text-slate-300 font-medium hover:text-amber-400 transition-colors"
                   >
                     {item.label}
                   </button>
                 ))}
                 <a 
                   href="tel:13059840456"
-                  className="btn-primary flex items-center justify-center gap-2 w-full"
+                  className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold"
                 >
                   <Phone className="w-4 h-4" />
                   {t('nav.callNow')}
@@ -149,6 +147,14 @@ function App() {
       <Footer />
       <FloatingCTA />
     </div>
+  )
+}
+
+function App() {
+  return (
+    <I18nProvider>
+      <AppContent />
+    </I18nProvider>
   )
 }
 

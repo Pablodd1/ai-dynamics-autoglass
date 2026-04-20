@@ -1,60 +1,73 @@
 import { motion } from 'framer-motion'
-import { Car, Shield, Award, DollarSign, Settings, CheckCircle } from 'lucide-react'
-import { useLanguage } from '../context/LanguageContext'
+import { 
+  Truck, 
+  Cpu, 
+  Award, 
+  FileCheck, 
+  Gem, 
+  Zap,
+  Check
+} from 'lucide-react'
+import { useI18n } from '../i18n/I18nContext'
 
 const WhyChooseUs = () => {
-  const { t } = useLanguage()
+  const { t } = useI18n()
 
-  const stats = [
-    { value: '15+', label: t('why.stats.years') },
-    { value: '5,000+', label: t('why.stats.customers') },
-    { value: '4.9★', label: t('why.stats.rating') },
-    { value: '5 min', label: t('why.stats.response') },
-  ]
-
-  const features = [
+  const reasons = [
     {
-      icon: Car,
-      title: t('why.feature1.title'),
-      description: t('why.feature1.desc'),
+      icon: Truck,
+      title: t('whyUs.cards.mobile.title'),
+      description: t('whyUs.cards.mobile.desc'),
+      stat: 'Free',
+      statLabel: 'Mobile Service',
     },
     {
-      icon: Shield,
-      title: t('why.feature2.title'),
-      description: t('why.feature2.desc'),
+      icon: Cpu,
+      title: t('whyUs.cards.adas.title'),
+      description: t('whyUs.cards.adas.desc'),
+      stat: '100%',
+      statLabel: 'Calibration Success',
+      highlight: true,
     },
     {
       icon: Award,
-      title: t('why.feature3.title'),
-      description: t('why.feature3.desc'),
+      title: t('whyUs.cards.warranty.title'),
+      description: t('whyUs.cards.warranty.desc'),
+      stat: 'Lifetime',
+      statLabel: 'Warranty',
     },
     {
-      icon: CheckCircle,
-      title: t('why.feature4.title'),
-      description: t('why.feature4.desc'),
+      icon: FileCheck,
+      title: t('whyUs.cards.insurance.title'),
+      description: t('whyUs.cards.insurance.desc'),
+      stat: '$0',
+      statLabel: 'With Most Insurance',
     },
     {
-      icon: DollarSign,
-      title: t('why.feature5.title'),
-      description: t('why.feature5.desc'),
+      icon: Gem,
+      title: t('whyUs.cards.luxury.title'),
+      description: t('whyUs.cards.luxury.desc'),
+      stat: 'Certified',
+      statLabel: 'Luxury Specialists',
     },
     {
-      icon: Settings,
-      title: t('why.feature6.title'),
-      description: t('why.feature6.desc'),
+      icon: Zap,
+      title: t('whyUs.cards.speed.title'),
+      description: t('whyUs.cards.speed.desc'),
+      stat: '60-90',
+      statLabel: 'Minutes Average',
     },
   ]
 
   return (
-    <section id="why-us" className="section-padding bg-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
+    <section id="why-us" className="relative py-24 overflow-hidden bg-slate-900">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,68 +75,78 @@ const WhyChooseUs = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block bg-accent/10 text-accent font-semibold px-4 py-2 rounded-full mb-4">
-            {t('why.badge')}
+          <span className="inline-block px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-medium mb-4">
+            {t('whyUs.badge')}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {t('why.title')}{' '}
-            <span className="text-gradient">{t('why.titleHighlight')}</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            {t('whyUs.title')}
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            {t('why.subtitle')}
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+            {t('whyUs.subtitle')}
           </p>
         </motion.div>
 
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
-        >
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="text-center p-6 bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl"
-            >
-              <div className="text-3xl md:text-4xl font-bold text-primary-700 mb-2">{stat.value}</div>
-              <div className="text-gray-600 text-sm">{stat.label}</div>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
+        {/* Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {reasons.map((reason, index) => (
             <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
+              key={reason.title as string}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="flex gap-4"
+              className={`group relative p-8 rounded-3xl transition-all duration-500 hover:-translate-y-2 ${
+                reason.highlight 
+                  ? 'bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-amber-500/30' 
+                  : 'bg-slate-800/50 border border-slate-700/50 hover:border-amber-500/30'
+              }`}
             >
-              <div className="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <feature.icon className="w-6 h-6 text-accent" />
+              {/* Icon */}
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${
+                reason.highlight 
+                  ? 'bg-gradient-to-br from-amber-500 to-amber-600' 
+                  : 'bg-slate-700/50 group-hover:bg-amber-500/20 transition-colors'
+              }`}>
+                <reason.icon className={`w-7 h-7 ${reason.highlight ? 'text-slate-900' : 'text-amber-500'}`} />
               </div>
-              <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm">{feature.description}</p>
+
+              {/* Content */}
+              <h3 className="text-xl font-bold text-white mb-3">{reason.title}</h3>
+              <p className="text-slate-400 text-sm mb-6 leading-relaxed">{reason.description}</p>
+
+              {/* Stat */}
+              <div className="pt-6 border-t border-slate-700/50">
+                <div className={`text-2xl font-bold ${reason.highlight ? 'text-amber-400' : 'text-white'}`}>
+                  {reason.stat}
+                </div>
+                <div className="text-sm text-slate-500">{reason.statLabel}</div>
+              </div>
+
+              {/* Check marks */}
+              <div className="absolute top-8 right-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center">
+                  <Check className="w-4 h-4 text-amber-500" />
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Trust Badge */}
+        {/* Certification Banner */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <div className="inline-flex items-center gap-3 bg-green-50 text-green-700 px-6 py-3 rounded-full">
-            <CheckCircle className="w-5 h-5" />
-            <span className="font-medium">100% {t('why.feature4.title')}</span>
+          <p className="text-slate-500 mb-4">Certified & Approved By</p>
+          <div className="flex flex-wrap justify-center gap-8 items-center">
+            {['AGSC Certified', 'ASE Certified Techs', 'OEM Approved', 'BBB A+ Rated', 'Insurance Approved'].map((cert) => (
+              <div key={cert} className="flex items-center gap-2 text-slate-400">
+                <Check className="w-4 h-4 text-green-500" />
+                <span className="text-sm">{cert}</span>
+              </div>
+            ))}
           </div>
         </motion.div>
       </div>

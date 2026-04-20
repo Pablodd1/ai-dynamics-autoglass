@@ -1,70 +1,73 @@
 import { motion } from 'framer-motion'
 import { Star, Quote } from 'lucide-react'
-import { useLanguage } from '../context/LanguageContext'
+import { useI18n } from '../i18n/I18nContext'
 
 const Reviews = () => {
-  const { t, language } = useLanguage()
+  const { t, language } = useI18n()
 
-  const reviews = [
+  const reviews = language === 'es' ? [
     {
-      name: 'Carlos Rodriguez',
-      location: language === 'es' ? 'Miami, FL' : 'Miami, FL',
+      name: 'Carlos M.',
+      location: 'Miami, FL',
       rating: 5,
-      text: language === 'es' 
-        ? 'Se me rompió el parabrisas en la I-95. Llamé a las 2pm, llegaron a mi oficina a las 4pm. Terminaron en 45 minutos. ¡Servicio increíble!'
-        : 'Cracked my windshield on I-95. Called at 2pm, they were at my office by 4pm. Done in 45 minutes. Incredible service!',
-      service: language === 'es' ? 'Reemplazo de Parabrisas' : 'Windshield Replacement',
+      text: 'Servicio increíblemente rápido. Llegaron a mi oficina y reemplazaron el parabrisas en menos de una hora. Profesionales y limpios.',
+      avatar: 'CM',
     },
     {
-      name: 'Maria Gonzalez',
-      location: language === 'es' ? 'West Palm Beach, FL' : 'West Palm Beach, FL',
+      name: 'María G.',
+      location: 'West Palm Beach',
       rating: 5,
-      text: language === 'es'
-        ? 'El mejor precio que encontré después de llamar a 5 tiendas. Vinieron a mi casa, hicieron un trabajo perfecto, y hasta limpiaron después. ¡Muy recomendado!'
-        : 'Best price I found after calling 5 shops. They came to my house, did a perfect job, and even cleaned up after. Highly recommend!',
-      service: language === 'es' ? 'Reemplazo de Vidrio Trasero' : 'Rear Glass Replacement',
+      text: 'Mi BMW necesitaba calibración ADAS después del reemplazo. Lo hicieron perfecto, mucho más barato que el concesionario.',
+      avatar: 'MG',
     },
     {
-      name: 'James Thompson',
-      location: language === 'es' ? 'Coral Gables, FL' : 'Coral Gables, FL',
+      name: 'José R.',
+      location: 'Doral, FL',
       rating: 5,
-      text: language === 'es'
-        ? 'Mi seguro intentó enviarme a su taller "preferido" con 2 semanas de espera. Autoglass-JM lo hizo al día siguiente y manejaron todo el papeleo.'
-        : 'My insurance tried to send me to their "preferred" shop with a 2-week wait. Autoglass-JM did it next day and handled all the paperwork.',
-      service: language === 'es' ? 'Reparación de Ventana' : 'Side Window Repair',
+      text: 'Excelente servicio al cliente. Hablan español, manejaron todo con el seguro y no tuve que pagar nada de mi bolsillo.',
+      avatar: 'JR',
     },
     {
-      name: 'Lisa Chen',
-      location: language === 'es' ? 'Miami Beach, FL' : 'Miami Beach, FL',
+      name: 'Ana L.',
+      location: 'Miami Beach',
       rating: 5,
-      text: language === 'es'
-        ? 'Una piedra golpeó mi Tesla. Me preocupaban los sensores pero supieron exactamente qué hacer. Calibración perfecta, el vidrio parece OEM.'
-        : 'Got a rock chip on my Tesla. Was worried about the sensors but they knew exactly what to do. Perfect recalibration, glass looks OEM.',
-      service: language === 'es' ? 'Reparación de Astilla' : 'Chip Repair',
+      text: 'Llamé por una astilla en mi parabrisas y vinieron el mismo día. La reparación quedó imperceptible. Muy recomendados.',
+      avatar: 'AL',
+    },
+  ] : [
+    {
+      name: 'Michael T.',
+      location: 'Miami, FL',
+      rating: 5,
+      text: 'Incredibly fast service. They came to my office and replaced my windshield in under an hour. Professional and clean work.',
+      avatar: 'MT',
     },
     {
-      name: 'David Martinez',
-      location: language === 'es' ? 'Hialeah, FL' : 'Hialeah, FL',
+      name: 'Sarah K.',
+      location: 'West Palm Beach',
       rating: 5,
-      text: language === 'es'
-        ? 'Llamada de emergencia a altas horas de la noche - ¡contestaron! Arreglaron mi ventana rota a las 10pm para que pudiera asegurar mi carro. Salvavidas.'
-        : 'Emergency late night call - they actually answered! Fixed my broken window at 10pm so I could secure my car. Lifesavers.',
-      service: language === 'es' ? 'Servicio de Emergencia' : 'Emergency Service',
+      text: 'My BMW needed ADAS calibration after the replacement. They did it perfectly and much cheaper than the dealership.',
+      avatar: 'SK',
     },
     {
-      name: 'Jennifer Adams',
-      location: language === 'es' ? 'Kendall, FL' : 'Kendall, FL',
+      name: 'David R.',
+      location: 'Doral, FL',
       rating: 5,
-      text: language === 'es'
-        ? 'Los usamos para nuestra flota de 12 vans de entrega. Configuraron un programa de mantenimiento y nos dan prioridad. Excelente para dueños de negocios.'
-        : 'Used them for our fleet of 12 delivery vans. They set up a maintenance schedule and give us priority. Great for business owners.',
-      service: language === 'es' ? 'Servicio de Flotas' : 'Fleet Service',
+      text: 'Excellent customer service. They handled all the insurance paperwork and I paid nothing out of pocket. Lifetime warranty!',
+      avatar: 'DR',
+    },
+    {
+      name: 'Jennifer M.',
+      location: 'Miami Beach',
+      rating: 5,
+      text: 'Called about a chip in my windshield and they came same day. The repair is invisible. Highly recommended!',
+      avatar: 'JM',
     },
   ]
 
   return (
-    <section id="reviews" className="section-padding bg-gray-50">
-      <div className="max-w-7xl mx-auto">
+    <section id="reviews" className="relative py-24 bg-slate-950">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -72,20 +75,19 @@ const Reviews = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block bg-primary-100 text-primary-700 font-semibold px-4 py-2 rounded-full mb-4">
+          <span className="inline-block px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-medium mb-4">
             {t('reviews.badge')}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {t('reviews.title')}{' '}
-            <span className="text-gradient">{t('reviews.titleHighlight')}</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            {t('reviews.title')}
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
             {t('reviews.subtitle')}
           </p>
         </motion.div>
 
         {/* Reviews Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {reviews.map((review, index) => (
             <motion.div
               key={review.name}
@@ -93,56 +95,51 @@ const Reviews = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-shadow"
+              className="group relative p-6 rounded-2xl bg-slate-900 border border-slate-800 hover:border-amber-500/30 transition-all duration-500"
             >
               {/* Quote Icon */}
-              <Quote className="w-8 h-8 text-accent/20 mb-4" />
+              <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <Quote className="w-8 h-8 text-amber-500" />
+              </div>
 
               {/* Rating */}
               <div className="flex gap-1 mb-4">
-                {[...Array(review.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                {Array.from({ length: review.rating }).map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
                 ))}
               </div>
 
-              {/* Review Text */}
-              <p className="text-gray-700 mb-6 leading-relaxed">&quot;{review.text}&quot;</p>
+              {/* Text */}
+              <p className="text-slate-300 text-sm mb-6 leading-relaxed">{review.text}</p>
 
               {/* Author */}
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-accent rounded-full flex items-center justify-center text-white font-bold">
-                  {review.name[0]}
+              <div className="flex items-center gap-3 pt-4 border-t border-slate-800">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center text-slate-900 font-bold text-sm">
+                  {review.avatar}
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-900">{review.name}</p>
-                  <p className="text-sm text-gray-500">{review.location}</p>
-                  <p className="text-xs text-accent mt-1">{review.service}</p>
+                  <div className="font-semibold text-white text-sm">{review.name}</div>
+                  <div className="text-xs text-slate-500">{review.location}</div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Overall Rating */}
+        {/* Review Platforms */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          className="mt-16 flex flex-wrap justify-center gap-8 items-center"
         >
-          <div className="inline-flex items-center gap-4 bg-white px-8 py-6 rounded-2xl shadow-lg">
-            <div className="text-5xl font-bold text-gradient">4.9</div>
-            <div className="text-left">
-              <div className="flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-              <p className="text-gray-600 text-sm mt-1">
-                {language === 'es' ? 'Basado en 2,847+ reseñas' : 'Based on 2,847+ reviews'}
-              </p>
+          {['Google', 'Yelp', 'Facebook', 'BBB'].map((platform) => (
+            <div key={platform} className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-800">
+              <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
+              <span className="text-sm text-slate-400">{platform}</span>
+              <span className="text-sm font-bold text-white">4.9</span>
             </div>
-          </div>
+          ))}
         </motion.div>
       </div>
     </section>

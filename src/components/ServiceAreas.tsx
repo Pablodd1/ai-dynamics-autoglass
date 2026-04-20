@@ -1,29 +1,41 @@
 import { motion } from 'framer-motion'
-import { MapPin, Phone } from 'lucide-react'
-import { useLanguage } from '../context/LanguageContext'
-
-const miamiAreas = [
-  'Miami Beach', 'Downtown Miami', 'Brickell', 'Coral Gables', 'Coconut Grove',
-  'Wynwood', 'Design District', 'Little Havana', 'Allapattah', 'Liberty City',
-  'Overtown', 'Upper East Side', 'Midtown', 'Edgewater',
-]
-
-const browardAreas = [
-  'Hollywood', 'Fort Lauderdale', 'Pembroke Pines', 'Miramar', 'Davie',
-  'Plantation', 'Sunrise', 'Weston', 'Coral Springs', 'Deerfield Beach',
-]
-
-const palmBeachAreas = [
-  'West Palm Beach', 'Palm Beach', 'Boca Raton', 'Delray Beach', 'Boynton Beach',
-  'Lake Worth', 'Wellington', 'Jupiter', 'Palm Beach Gardens', 'Royal Palm Beach',
-]
+import { MapPin, Check } from 'lucide-react'
+import { useI18n } from '../i18n/I18nContext'
 
 const ServiceAreas = () => {
-  const { t } = useLanguage()
+  const { t, language } = useI18n()
+
+  const mainAreas = language === 'es' ? [
+    { name: 'Miami', zips: '33101-33199' },
+    { name: 'Miami Beach', zips: '33139-33141' },
+    { name: 'Doral', zips: '33122-33178' },
+    { name: 'Kendall', zips: '33143-33186' },
+    { name: 'West Palm Beach', zips: '33401-33422' },
+    { name: 'Palm Beach', zips: '33480' },
+  ] : [
+    { name: 'Miami', zips: '33101-33199' },
+    { name: 'Miami Beach', zips: '33139-33141' },
+    { name: 'Doral', zips: '33122-33178' },
+    { name: 'Kendall', zips: '33143-33186' },
+    { name: 'West Palm Beach', zips: '33401-33422' },
+    { name: 'Palm Beach', zips: '33480' },
+  ]
+
+  const otherAreas = language === 'es' ? [
+    'Hialeah', 'Coral Gables', 'Aventura', 'Sunny Isles', 'Brickell', 
+    'Wynwood', 'Design District', 'Little Havana', 'Coconut Grove',
+    'Pinecrest', 'Palmetto Bay', 'Cutler Bay', 'Homestead',
+    'Boca Raton', 'Delray Beach', 'Boynton Beach', 'Lake Worth'
+  ] : [
+    'Hialeah', 'Coral Gables', 'Aventura', 'Sunny Isles', 'Brickell', 
+    'Wynwood', 'Design District', 'Little Havana', 'Coconut Grove',
+    'Pinecrest', 'Palmetto Bay', 'Cutler Bay', 'Homestead',
+    'Boca Raton', 'Delray Beach', 'Boynton Beach', 'Lake Worth'
+  ]
 
   return (
-    <section id="areas" className="section-padding bg-gray-50">
-      <div className="max-w-7xl mx-auto">
+    <section id="areas" className="relative py-24 bg-slate-900">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -31,114 +43,84 @@ const ServiceAreas = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block bg-primary-100 text-primary-700 font-semibold px-4 py-2 rounded-full mb-4">
+          <span className="inline-block px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-medium mb-4">
             {t('areas.badge')}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {t('areas.title')}{' '}
-            <span className="text-gradient">{t('areas.titleHighlight')}</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            {t('areas.title')}
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
             {t('areas.subtitle')}
           </p>
         </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Main Areas */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-amber-500" />
+              {t('areas.mainCities')}
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {mainAreas.map((area) => (
+                <div
+                  key={area.name}
+                  className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 hover:border-amber-500/30 transition-colors"
+                >
+                  <div className="font-semibold text-white">{area.name}</div>
+                  <div className="text-sm text-slate-500">ZIP: {area.zips}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* All Other Areas */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+              <Check className="w-5 h-5 text-green-500" />
+              {t('areas.allAreas')}
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {otherAreas.map((area) => (
+                <span
+                  key={area}
+                  className="px-3 py-1.5 rounded-full bg-slate-800 text-slate-300 text-sm border border-slate-700 hover:border-amber-500/30 hover:text-amber-400 transition-colors cursor-default"
+                >
+                  {area}
+                </span>
+              ))}
+            </div>
+            <p className="mt-6 text-sm text-slate-500">
+              {t('areas.zipcodes')}
+            </p>
+          </motion.div>
+        </div>
 
         {/* Map Placeholder */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 bg-gradient-to-br from-primary-100 to-accent/20 rounded-3xl p-8 md:p-12 relative overflow-hidden"
+          className="mt-16 p-8 rounded-3xl bg-slate-800/50 border border-slate-700/50 text-center"
         >
-          <div className="absolute inset-0 opacity-30">
-            <svg className="w-full h-full" viewBox="0 0 800 400" fill="none">
-              {/* Simplified map outline of South Florida */}
-              <path
-                d="M150 350 L200 200 L350 180 L450 150 L550 100 L650 80 L700 120 L750 200 L720 280 L650 320 L550 350 L400 380 L250 370 Z"
-                stroke="#2563eb"
-                strokeWidth="3"
-                fill="none"
-              />
-              <circle cx="250" cy="280" r="8" fill="#f59e0b" />
-              <circle cx="400" cy="250" r="8" fill="#f59e0b" />
-              <circle cx="600" cy="180" r="8" fill="#f59e0b" />
-              <text x="230" y="310" fill="#1e3a8a" fontSize="14" fontWeight="bold">Miami</text>
-              <text x="380" y="280" fill="#1e3a8a" fontSize="14" fontWeight="bold">Fort Lauderdale</text>
-              <text x="580" y="210" fill="#1e3a8a" fontSize="14" fontWeight="bold">West Palm Beach</text>
-            </svg>
+          <div className="w-16 h-16 rounded-full bg-amber-500/10 flex items-center justify-center mx-auto mb-4">
+            <MapPin className="w-8 h-8 text-amber-500" />
           </div>
-          
-          <div className="relative z-10 grid md:grid-cols-3 gap-8">
-            {/* Miami-Dade */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center">
-                  <MapPin className="w-5 h-5 text-primary-700" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900">{t('areas.miami')}</h3>
-              </div>
-              <ul className="space-y-2 text-sm text-gray-600">
-                {miamiAreas.map((area) => (
-                  <li key={area} className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-accent rounded-full" />
-                    {area}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Broward */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center">
-                  <MapPin className="w-5 h-5 text-primary-700" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900">{t('areas.broward')}</h3>
-              </div>
-              <ul className="space-y-2 text-sm text-gray-600">
-                {browardAreas.map((area) => (
-                  <li key={area} className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-accent rounded-full" />
-                    {area}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Palm Beach */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center">
-                  <MapPin className="w-5 h-5 text-primary-700" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900">{t('areas.palmBeach')}</h3>
-              </div>
-              <ul className="space-y-2 text-sm text-gray-600">
-                {palmBeachAreas.map((area) => (
-                  <li key={area} className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-accent rounded-full" />
-                    {area}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <p className="text-gray-600 mb-4">{t('areas.cta')}</p>
+          <h3 className="text-xl font-bold text-white mb-2">Mobile Service Coverage</h3>
+          <p className="text-slate-400 mb-4">We come to you anywhere in Miami-Dade and Palm Beach counties</p>
           <a
             href="tel:13059840456"
-            className="inline-flex items-center gap-2 text-primary-700 font-semibold hover:text-primary-800"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-semibold hover:from-amber-400 hover:to-amber-500 transition-all"
           >
-            <Phone className="w-5 h-5" />
-            {t('areas.ctaButton')}
+            Call for Service Area Confirmation
           </a>
         </motion.div>
       </div>

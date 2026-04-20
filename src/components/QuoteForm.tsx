@@ -1,72 +1,53 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Send, CheckCircle, MessageCircle, Phone, Mail } from 'lucide-react'
-import { useLanguage } from '../context/LanguageContext'
+import { Send, CheckCircle, Phone } from 'lucide-react'
+import { useState } from 'react'
+import { useI18n } from '../i18n/I18nContext'
 
 const QuoteForm = () => {
-  const { t } = useLanguage()
+  const { t } = useI18n()
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
-    carMake: '',
-    carModel: '',
-    carYear: '',
-    serviceType: '',
+    vehicle: '',
+    service: '',
+    location: '',
+    insurance: '',
     message: '',
-    contactMethod: 'whatsapp',
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsSubmitting(true)
+    
+    // Simulate submission
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    
+    setIsSubmitting(false)
     setIsSubmitted(true)
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        carMake: '',
-        carModel: '',
-        carYear: '',
-        serviceType: '',
-        message: '',
-        contactMethod: 'whatsapp',
-      })
-    }, 5000)
+    setFormData({
+      name: '', phone: '', email: '', vehicle: '', service: '',
+      location: '', insurance: '', message: ''
+    })
+    
+    setTimeout(() => setIsSubmitted(false), 5000)
   }
 
   const serviceOptions = [
-    { value: 'windshield', label: t('form.serviceWindshield') },
-    { value: 'chip', label: t('form.serviceChip') },
-    { value: 'side', label: t('form.serviceSide') },
-    { value: 'rear', label: t('form.serviceRear') },
-    { value: 'not_sure', label: t('form.serviceNotSure') },
+    { value: '', label: t('quote.form.serviceOptions.select') },
+    { value: 'windshield', label: t('quote.form.serviceOptions.windshield') },
+    { value: 'repair', label: t('quote.form.serviceOptions.repair') },
+    { value: 'adas', label: t('quote.form.serviceOptions.adas') },
+    { value: 'sideWindow', label: t('quote.form.serviceOptions.sideWindow') },
+    { value: 'backGlass', label: t('quote.form.serviceOptions.backGlass') },
+    { value: 'mirror', label: t('quote.form.serviceOptions.mirror') },
   ]
-
-  const contactOptions = [
-    { value: 'whatsapp', label: t('form.contactWhatsApp'), icon: MessageCircle, color: 'green' },
-    { value: 'phone', label: t('form.contactPhone'), icon: Phone, color: 'primary' },
-    { value: 'email', label: t('form.contactEmail'), icon: Mail, color: 'accent' },
-  ]
-
-  const getContactMethodName = (method: string) => {
-    switch (method) {
-      case 'whatsapp': return t('form.success.whatsapp')
-      case 'phone': return t('form.success.phone')
-      case 'email': return t('form.success.email')
-      default: return method
-    }
-  }
 
   return (
-    <section id="quote" className="section-padding bg-white">
-      <div className="max-w-4xl mx-auto">
+    <section id="quote" className="relative py-24 bg-slate-950">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -74,207 +55,179 @@ const QuoteForm = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <span className="inline-block bg-accent/10 text-accent font-semibold px-4 py-2 rounded-full mb-4">
-            {t('form.badge')}
+          <span className="inline-block px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-sm font-medium mb-4">
+            {t('quote.badge')}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {t('form.title')}{' '}
-            <span className="text-gradient">{t('form.titleHighlight')}</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            {t('quote.title')}
           </h2>
-          <p className="text-xl text-gray-600">
-            {t('form.subtitle')}
+          <p className="text-lg text-slate-400">
+            {t('quote.subtitle')}
           </p>
         </motion.div>
 
-        {isSubmitted ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-green-50 border-2 border-green-200 rounded-3xl p-12 text-center"
-          >
-            <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-10 h-10 text-white" />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">{t('form.success.title')}</h3>
-            <p className="text-gray-600 text-lg">
-              {t('form.success.message').replace('{method}', getContactMethodName(formData.contactMethod))}
-            </p>
-          </motion.div>
-        ) : (
-          <motion.form
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            onSubmit={handleSubmit}
-            className="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-gray-100"
-          >
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              {/* Name */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.name')}</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder={t('form.namePlaceholder')}
-                  required
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
-                />
-              </div>
-
-              {/* Phone */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.phone')}</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder={t('form.phonePlaceholder')}
-                  required
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
-                />
-              </div>
-
-              {/* Email */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.email')}</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder={t('form.emailPlaceholder')}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
-                />
-              </div>
-
-              {/* Car Make */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.carMake')}</label>
-                <input
-                  type="text"
-                  name="carMake"
-                  value={formData.carMake}
-                  onChange={handleChange}
-                  placeholder={t('form.carMakePlaceholder')}
-                  required
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
-                />
-              </div>
-
-              {/* Car Model */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.carModel')}</label>
-                <input
-                  type="text"
-                  name="carModel"
-                  value={formData.carModel}
-                  onChange={handleChange}
-                  placeholder={t('form.carModelPlaceholder')}
-                  required
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
-                />
-              </div>
-
-              {/* Car Year */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.carYear')}</label>
-                <input
-                  type="number"
-                  name="carYear"
-                  value={formData.carYear}
-                  onChange={handleChange}
-                  placeholder={t('form.carYearPlaceholder')}
-                  min="1980"
-                  max="2030"
-                  required
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
-                />
-              </div>
-            </div>
-
-            {/* Service Type */}
-            <div className="mb-6">
-              <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.serviceType')}</label>
-              <select
-                name="serviceType"
-                value={formData.serviceType}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all"
-              >
-                <option value="">{t('form.serviceSelect')}</option>
-                {serviceOptions.map((option) => (
-                  <option key={option.value} value={option.value}>{option.label}</option>
-                ))}
-              </select>
-            </div>
-
-            {/* Contact Method */}
-            <div className="mb-6">
-              <label className="block text-sm font-semibold text-gray-700 mb-3">{t('form.contactMethod')}</label>
-              <div className="grid grid-cols-3 gap-4">
-                {contactOptions.map((option) => (
-                  <label
-                    key={option.value}
-                    className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${
-                      formData.contactMethod === option.value
-                        ? option.color === 'green' 
-                          ? 'border-green-500 bg-green-50' 
-                          : option.color === 'primary'
-                            ? 'border-primary-500 bg-primary-50'
-                            : 'border-accent bg-accent/10'
-                        : 'border-gray-200 hover:border-gray-300'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="contactMethod"
-                      value={option.value}
-                      checked={formData.contactMethod === option.value}
-                      onChange={handleChange}
-                      className="sr-only"
-                    />
-                    <option.icon className={`w-5 h-5 ${
-                      option.color === 'green' 
-                        ? 'text-green-500' 
-                        : option.color === 'primary'
-                          ? 'text-primary-500'
-                          : 'text-accent'
-                    }`} />
-                    <span className="text-sm font-medium">{option.label}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Message */}
-            <div className="mb-8">
-              <label className="block text-sm font-semibold text-gray-700 mb-2">{t('form.message')}</label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder={t('form.messagePlaceholder')}
-                rows={4}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all resize-none"
-              />
-            </div>
-
-            {/* Submit */}
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full btn-primary flex items-center justify-center gap-2"
+        {/* Form Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="relative p-8 md:p-12 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700/50 shadow-2xl"
+        >
+          {/* Success State */}
+          {isSubmitted ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-12"
             >
-              <Send className="w-5 h-5" />
-              {t('form.submit')}
-            </motion.button>
-          </motion.form>
-        )}
+              <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-6">
+                <CheckCircle className="w-10 h-10 text-green-500" />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2">{t('quote.form.success')}</h3>
+              <p className="text-slate-400">{t('quote.form.successMessage')}</p>
+            </motion.div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    {t('quote.form.name')} *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none transition-colors"
+                    placeholder="John Smith"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    {t('quote.form.phone')} *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none transition-colors"
+                    placeholder="(305) 984-0456"
+                  />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    {t('quote.form.emailLabel')}
+                  </label>
+                  <input
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none transition-colors"
+                    placeholder="john@email.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    {t('quote.form.vehicle')} *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.vehicle}
+                    onChange={(e) => setFormData({ ...formData, vehicle: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none transition-colors"
+                    placeholder="2024 Toyota Camry"
+                  />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    {t('quote.form.service')} *
+                  </label>
+                  <select
+                    required
+                    value={formData.service}
+                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white focus:border-amber-500 focus:outline-none transition-colors"
+                  >
+                    {serviceOptions.map((opt) => (
+                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    {t('quote.form.location')}
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.location}
+                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none transition-colors"
+                    placeholder="Miami, FL"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                  {t('quote.form.insurance')}
+                </label>
+                <input
+                  type="text"
+                  value={formData.insurance}
+                  onChange={(e) => setFormData({ ...formData, insurance: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none transition-colors"
+                  placeholder="State Farm, Geico, etc."
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                  {t('quote.form.message')}
+                </label>
+                <textarea
+                  rows={4}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-slate-500 focus:border-amber-500 focus:outline-none transition-colors resize-none"
+                  placeholder="Tell us about the damage or any special requirements..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-900 font-bold text-lg hover:from-amber-400 hover:to-amber-500 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-slate-900/30 border-t-slate-900 rounded-full animate-spin" />
+                    {t('quote.form.sending')}
+                  </>
+                ) : (
+                  <>
+                    {t('quote.form.submit')}
+                    <Send className="w-5 h-5" />
+                  </>
+                )}
+              </button>
+
+              <p className="text-center text-sm text-slate-500">
+                Or call us directly at{' '}
+                <a href="tel:13059840456" className="text-amber-400 hover:text-amber-300 font-semibold">
+                  (305) 984-0456
+                </a>
+              </p>
+            </form>
+          )}
+        </motion.div>
       </div>
     </section>
   )

@@ -11,68 +11,58 @@
     @apply antialiased;
     -webkit-tap-highlight-color: transparent;
   }
-  
-  /* Mobile viewport fix */
-  @supports (height: 100dvh) {
-    .min-h-screen {
-      min-height: 100dvh;
-    }
-  }
 }
 
 @layer components {
   .glass {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
-  }
-  
-  .glass-dark {
-    @apply bg-black/20 backdrop-blur-md border border-white/10;
+    @apply bg-slate-800/50 backdrop-blur-md border border-slate-700/50;
   }
   
   .btn-primary {
-    @apply bg-accent hover:bg-accent-dark text-white font-semibold px-6 py-3 md:px-8 md:py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl active:scale-95;
+    @apply bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-900 font-bold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg shadow-amber-500/25 active:scale-95;
   }
   
   .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-primary-900 font-semibold px-6 py-3 md:px-8 md:py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg active:scale-95;
+    @apply border-2 border-slate-600 hover:border-amber-500 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95;
   }
   
   .text-gradient {
-    @apply bg-gradient-to-r from-primary-600 to-accent bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 bg-clip-text text-transparent;
   }
   
   .section-padding {
-    @apply py-16 md:py-20 lg:py-32 px-4 sm:px-6 lg:px-8;
+    @apply py-16 md:py-24 lg:py-32 px-4 sm:px-6 lg:px-8;
   }
-  
-  /* Safe area for mobile bottom bar */
-  .safe-area-pb {
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-  }
-  
-  /* Tap highlight removal for mobile */
-  .tap-highlight-none {
-    -webkit-tap-highlight-color: transparent;
-    tap-highlight-color: transparent;
-  }
-  
-  /* Prevent text selection on buttons */
-  .no-select {
-    user-select: none;
-    -webkit-user-select: none;
-  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(245, 158, 11, 0.3);
+  color: white;
 }
 
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .glass {
-    @apply bg-white/15;
-  }
-  
-  /* Improve touch targets */
-  a, button {
-    min-height: 44px;
-    min-width: 44px;
+    @apply bg-slate-800/70;
   }
 }
 
