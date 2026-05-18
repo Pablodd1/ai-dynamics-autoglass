@@ -1,4 +1,4 @@
-import { Sparkles, Phone, Mail, MapPin, Instagram, Facebook, Twitter } from 'lucide-react'
+import { Sparkles, Phone, Mail, MapPin, Instagram, Facebook, Twitter, MessageCircle } from 'lucide-react'
 import { useI18n } from '../i18n/I18nContext'
 
 const Footer = () => {
@@ -27,6 +27,10 @@ const Footer = () => {
               <a href="mailto:info@autoglassjm.com" className="flex items-center gap-2 text-slate-300 hover:text-amber-400 transition-colors">
                 <Mail className="w-4 h-4" />
                 info@autoglassjm.com
+              </a>
+              <a href="https://wa.me/13059840456" target="_blank" className="flex items-center gap-2 text-slate-300 hover:text-amber-400 transition-colors">
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp
               </a>
               <div className="flex items-center gap-2 text-slate-300">
                 <MapPin className="w-4 h-4" />
